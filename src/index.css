@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "PoppinsRegular";
+  src: local("PoppinsRegular"),
+    url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  margin: 0;
+  font-family: PoppinsRegular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #fff;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  margin-top: 6rem;
+}
