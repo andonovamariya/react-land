@@ -1,0 +1,18 @@
+.item {
+  margin: 2rem 0;
+  color: #ccccff;
+  font-size: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid lightblue;
+}
+
+.link {
+  cursor: pointer;
+  font: inherit;
+  color: #ccccff;
+  background-color: #003d80;
+  border: 1px solid #003d80;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  text-decoration: none;
+}

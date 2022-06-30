@@ -1,18 +1,27 @@
+import { Action } from "./actions";
+
 let user = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).user
+  ? JSON.parse(localStorage.getItem("currentUser")!).email
   : "";
 let token = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).auth_token
+  ? JSON.parse(localStorage.getItem("currentUser")!).idToken
   : "";
 
-export const initialState = {
+export const initialState: State = {
   user: "" || user,
   token: "" || token,
   loading: false,
   errorMessage: "",
 };
 
-export const AuthReducer = (initialState, action) => {
+export interface State {
+  user: string;
+  token: string;
+  loading: boolean;
+  errorMessage?: string;
+}
+
+export const AuthReducer = (initialState: State, action: Action): State => {
   switch (action.type) {
     case "REQUEST_LOGIN":
       return {
@@ -22,8 +31,8 @@ export const AuthReducer = (initialState, action) => {
     case "LOGIN_SUCCESS":
       return {
         ...initialState,
-        user: action.payload.user,
-        token: action.payload.auth_token,
+        user: action.payload!.email,
+        token: action.payload!.idToken,
         loading: false,
       };
     case "LOGOUT":
