@@ -1,41 +1,29 @@
-import { useAuthDispatch, logoutUser, useAuthState } from "../../auth-context";
-import { useNavigate } from "react-router-dom";
+import { logoutUser, useAuthDispatch, useAuthState } from "../../auth-context";
+import { Link } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
-import Button from "../UI/Button";
 
 import styles from "./MainNavigation.module.css";
-import { useEffect, useState } from "react";
+import Button from "../UI/Button";
 
 const MainNavigation: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const dispatch = useAuthDispatch();
   const currentUserData = useAuthState();
+  const dispatch = useAuthDispatch();
+
+  const GREETING: string =
+    "Welcome, " +
+    (currentUserData.user.length > 0 ? ` ${currentUserData.user}` : "stranger");
 
   const logoutHandler = () => {
     logoutUser(dispatch);
-    setIsLoggedIn(false);
-    navigate("/login", { replace: true });
   };
-
-  useEffect(() => {
-    if (currentUserData.user.length > 0) {
-      setIsLoggedIn((prevState) => !prevState);
-    }
-  }, [currentUserData.user]);
-
-  const greeting: string =
-    currentUserData.user.length > 0
-      ? `Welcome ${currentUserData.user}`
-      : "Welcome stranger";
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>React Land Blog</div>
+
       <nav className={styles.nav}>
         <ul>
-          <li>{greeting}</li>
           <li>
             <NavLink
               to="/home"
@@ -53,12 +41,26 @@ const MainNavigation: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            {isLoggedIn && (
+            <NavLink
+              to="/commonErrors"
+              className={(navData) => (navData.isActive ? styles.active : "")}
+            >
+              Common errors
+            </NavLink>
+          </li>
+          <li className={styles.greeting}>{GREETING}</li>
+          <li>
+            {currentUserData.token && (
               <Button type="button" onClick={logoutHandler}>
                 Logout
               </Button>
             )}
           </li>
+          {!currentUserData.token && (
+            <li>
+              <Link to="/auth">Login</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

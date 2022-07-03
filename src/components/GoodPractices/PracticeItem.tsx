@@ -8,9 +8,11 @@ interface PracticeItemProps {
 
 const PracticeItem: React.FC<PracticeItemProps> = (props) => {
   return (
-    <li className={styles.item}>
-      <p>{props.title}</p>
-      <Link className = "link" to={`/goodPractices/${props.id}`}>View more</Link>
+    <li className={styles.practiceItem}>
+      <h3>{props.title}</h3>
+      <Link className={styles.link} to={`/goodPractices/${props.id}`}>
+        View more
+      </Link>
     </li>
   );
 };

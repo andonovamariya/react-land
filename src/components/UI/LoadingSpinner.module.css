@@ -2,16 +2,17 @@
   display: inline-block;
   width: 80px;
   height: 80px;
+  align-self: center;
 }
 .spinner:after {
   content: " ";
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid #ccccff;
-  border-color: #ccccff transparent #EDF1FF transparent;
+  border: 9px solid #ccccff;
+  border-color: #ccccff transparent #edf1ff transparent;
   animation: spinner 1.2s linear infinite;
 }
 @keyframes spinner {

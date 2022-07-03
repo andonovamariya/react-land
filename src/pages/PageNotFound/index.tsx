@@ -3,7 +3,7 @@ import styles from "./notFound.module.css";
 
 const NotFound: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.notFoundContainer}>
       <h1>Page not found</h1>
       <p>
         If you came upon this page by mistake, try checking the URL in your web

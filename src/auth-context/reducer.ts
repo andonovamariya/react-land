@@ -1,15 +1,15 @@
 import { Action } from "./actions";
 
-let user = localStorage.getItem("currentUser")
+let currentUser: string = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")!).email
   : "";
-let token = localStorage.getItem("currentUser")
+let currentToken: string = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")!).idToken
   : "";
 
 export const initialState: State = {
-  user: "" || user,
-  token: "" || token,
+  user: "" || currentUser,
+  token: "" || currentToken,
   loading: false,
   errorMessage: "",
 };
@@ -23,12 +23,12 @@ export interface State {
 
 export const AuthReducer = (initialState: State, action: Action): State => {
   switch (action.type) {
-    case "REQUEST_LOGIN":
+    case "REQUEST_AUTH":
       return {
         ...initialState,
         loading: true,
       };
-    case "LOGIN_SUCCESS":
+    case "AUTH_SUCCESS":
       return {
         ...initialState,
         user: action.payload!.email,
@@ -42,7 +42,7 @@ export const AuthReducer = (initialState: State, action: Action): State => {
         token: "",
       };
 
-    case "LOGIN_ERROR":
+    case "AUTH_ERROR":
       return {
         ...initialState,
         loading: false,

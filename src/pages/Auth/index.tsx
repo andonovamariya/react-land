@@ -1,13 +1,22 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { loginUser, useAuthDispatch } from "../../auth-context";
+import { useAuthState } from "../../auth-context";
+
 import Button from "../../components/UI/Button";
 import styles from "./auth.module.css";
 
 const Authenticate: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
+  const currentUserData = useAuthState();
+
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const AUTHENTICATION_METHOD: string = isLogin ? "LOGIN" : "SIGNUP";
+
+  const switchAuthenticationModeHandler = () => {
+    setIsLogin((previousState) => !previousState);
+  };
 
   const inputRefEmail = useRef<HTMLInputElement>(null);
   const inputRefPassword = useRef<HTMLInputElement>(null);
@@ -18,10 +27,14 @@ const Authenticate: React.FC = () => {
     const enteredEmail: string = inputRefEmail.current!.value;
     const enteredPassword: string = inputRefPassword.current!.value;
 
-    const payload = { enteredEmail, enteredPassword };
+    const authenticationPayload = {
+      enteredEmail,
+      enteredPassword,
+      AUTHENTICATION_METHOD,
+    };
 
     try {
-      const response = await loginUser(dispatch, payload);
+      const response = await loginUser(dispatch, authenticationPayload);
       if (!response) {
         return;
       }
@@ -33,7 +46,7 @@ const Authenticate: React.FC = () => {
 
   return (
     <section className={styles.authContainer}>
-      <h1>Login</h1>
+      <h1>{isLogin ? "Login" : "Sign up"}</h1>
       <form onSubmit={submitLoginHandler}>
         <div className={styles.control}>
           <label htmlFor="email">Enter your email</label>
@@ -50,7 +63,19 @@ const Authenticate: React.FC = () => {
           />
         </div>
         <div className={styles.actions}>
-          <Button type="submit">Login</Button>
+          {!currentUserData.loading && (
+            <Button type="submit">
+              {isLogin ? "Login" : "Create an account"}
+            </Button>
+          )}
+          {currentUserData.loading && <p>Sending a request to the server...</p>}
+          <Button
+            type="button"
+            className={styles.toggle}
+            onClick={switchAuthenticationModeHandler}
+          >
+            {isLogin ? "Create an account" : "Login with existing account"}
+          </Button>
         </div>
       </form>
     </section>

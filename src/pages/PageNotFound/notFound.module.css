@@ -1,4 +1,4 @@
-.container {
+.notFoundContainer {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-p {
+.notFoundContainer p {
   color: #ccccff;
   font-weight: 1000;
   font-size: 30px;
@@ -14,21 +14,21 @@ p {
   text-align: center;
 }
 
-.main-image {
+.notFoundContainer .main-image {
   width: 100%;
   height: 60rem;
   z-index: 0;
   overflow: hidden;
 }
 
-.main-image img {
+.notFoundContainer .main-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
 
-h1 {
+.notFoundContainer h1 {
   padding: 60px;
   text-align: center;
   background: #ccccff;

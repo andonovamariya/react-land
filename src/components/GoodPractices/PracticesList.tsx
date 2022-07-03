@@ -9,7 +9,7 @@ interface PracticeListProps {
 
 const PracticesList: React.FC<PracticeListProps> = (props) => {
   return (
-    <ul className={styles.goodPractices}>
+    <ul className={styles.goodPracticesList}>
       {props.practices.map((practice) => (
         <PracticeItem
           key={practice.id}

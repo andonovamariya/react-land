@@ -1,0 +1,35 @@
+.warningTextPractices,
+.errorTextPractices {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.warningTextPractices {
+  color: #9f6000;
+  background-color: #feefb3;
+  background-image: url("https://i.imgur.com/Z8q7ww7.png");
+}
+.errorTextPractices {
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url("https://i.imgur.com/GnyDvKN.png");
+}
+
+.linkPractices {
+  float: right;
+  color: #ccccff;
+  background-color: #003d80;
+  border-radius: 36px;
+  padding: 0.5rem 2rem;
+  padding-bottom: 0.5rem;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.linkPractices:visited {
+  background-color: #92b6d5;
+  color: #003d80;
+}

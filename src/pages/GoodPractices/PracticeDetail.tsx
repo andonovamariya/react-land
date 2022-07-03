@@ -1,47 +1,49 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
-import PracticeItem from "../../components/GoodPractices/PracticeItem";
+import { Params, useParams } from "react-router";
+import HighlightedPractice from "../../components/GoodPractices/HighlightedPractice";
+import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import { COMPLETED, PENDING } from "../../constants/httpStatuses";
 import useHttp from "../../hooks/use-http";
-import { getOnePractice } from "../../lib/api";
+import { getOnePractice } from "../../lib/api-good-practices";
+
+import styles from "./PracticeDetail.module.css";
 
 const PracticeDetail: React.FC = () => {
-  const params = useParams();
+  const params: Readonly<Params<string>> = useParams();
 
   const { practiceId } = params;
 
   const {
     sendRequest,
     status,
-    data: loadedPractice,
-    error,
+    responseData: loadedPractice,
+    errorMessage,
   } = useHttp(getOnePractice, true);
 
   useEffect(() => {
     sendRequest(practiceId);
   }, [sendRequest, practiceId]);
 
-  if (status === "pending") {
+  if (status === PENDING) {
     return (
-      <div className="centered">
+      <Card>
         <LoadingSpinner />
-      </div>
+      </Card>
     );
-  }
-
-  if (error) {
-    return <p className="centered">{error}</p>;
-  }
-
-  if (!loadedPractice.description) {
-    return <p>No description found!</p>;
   }
 
   return (
     <>
-      <PracticeItem
-        id={loadedPractice.practiceId}
+      {errorMessage && <p className={styles.errorTextPractices}>{errorMessage}</p>}
+      {!loadedPractice.description && status === COMPLETED && (
+        <p className={styles.warningTextPractices}>
+          No description found for that particular practice!
+        </p>
+      )}
+      <HighlightedPractice
         title={loadedPractice.title}
+        description={loadedPractice.description}
       />
     </>
   );

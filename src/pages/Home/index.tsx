@@ -1,5 +1,5 @@
 import reactLogo from "../../assets/reactLogo.webp";
-import styles from "./home.module.css";
+import styles from "./index.module.css";
 
 const Home: React.FC = () => {
   return (

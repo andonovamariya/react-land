@@ -1,0 +1,23 @@
+.singlePractice {
+  background-color: #ccccff;
+  color: #003d80;
+  border-radius: 22px;
+  padding: 3rem;
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.singlePractice p {
+  font-size: 2.5rem;
+  color: #003d80;
+}
+
+.singlePractice figcaption {
+  font-style: italic;
+  font-size: 1.5rem;
+  text-align: right;
+  color: #003d80;
+}
+
+

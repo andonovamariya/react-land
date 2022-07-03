@@ -1,79 +1,63 @@
-import { useRef, useEffect, FormEvent } from "react";
-import useHttp from "../../hooks/use-http";
-import { addPractice } from "../../lib/api";
+import { useRef, FormEvent } from "react";
 import Button from "../UI/Button";
+import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 import styles from "./NewPracticeForm.module.css";
 
+export interface InputtedData {
+  title: string;
+  description: string;
+}
+
 interface NewPracticeFormProps {
-  onAddPractice: () => void;
-  practiceId: string;
+  onAddPractice: (practiceData: InputtedData) => void;
+  isLoading: boolean;
 }
 
 const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
   const titleInputRef = useRef<HTMLInputElement>(null);
-  const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const { sendRequest, status, error } = useHttp(addPractice);
-
-  const { onAddPractice } = props;
-  const { practiceId } = props;
-
-  useEffect(() => {
-    if (status === "completed" && !error) {
-      onAddPractice();
-    }
-  }, [status, error, onAddPractice]);
-
-  const submitFormHandler = (event: FormEvent) => {
+  function submitFormHandler(event: FormEvent) {
     event.preventDefault();
 
     const enteredTitle: string = titleInputRef.current!.value;
-    const enteredDescription: string = descriptionTextAreaRef.current!.value;
+    const enteredDescription: string = descriptionTextareaRef.current!.value;
 
-    sendRequest({
-      practiceInputData: {
-        title: enteredTitle,
-        description: enteredDescription,
-      },
-      practiceId: practiceId,
-    });
-  };
+    const inputtedData: InputtedData = {
+      title: enteredTitle,
+      description: enteredDescription,
+    };
 
+    props.onAddPractice(inputtedData);
+  }
   return (
-    <form className={styles.form} onSubmit={submitFormHandler}>
-      {status === "pending" && (
-        <div className={styles.contol}>
-          <LoadingSpinner />
+    <Card>
+      <form
+        className={styles.addPracticeForm}
+        onSubmit={submitFormHandler}
+      >
+        {props.isLoading && <LoadingSpinner />}
+        <div className={styles.control}>
+          <label htmlFor="title">Title</label>
+          <input type="title" id="title" ref={titleInputRef} />
         </div>
-      )}
-      <div className={styles.control}>
-        <label htmlFor="practiceTitle">Title:</label>
-        <input
-          required
-          type="text"
-          id="practiceTitle"
-          name="practiceTitle"
-          ref={titleInputRef}
-        />
-      </div>
-      <div className={styles.control}>
-        <label htmlFor="practiceDescription">Description:</label>
-        <textarea
-          required
-          id="practiceDescription"
-          name="practiceDescription"
-          rows={5}
-          ref={descriptionTextAreaRef}
-        />
-      </div>
-      <div className={styles.actions}>
-        <Button className="btn" type="submit">
-          Add a good practice
-        </Button>
-      </div>
-    </form>
+        <div className={styles.control}>
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            rows={10}
+            ref={descriptionTextareaRef}
+          ></textarea>
+        </div>
+        <div className={styles.actions}>
+          <Button className="button" type="submit">
+            Add good practice
+          </Button>
+        </div>
+      </form>
+    </Card>
   );
 };
 

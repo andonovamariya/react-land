@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  height: 5rem;
+  height: 7rem;
   display: flex;
   padding: 0 10%;
   justify-content: space-between;
@@ -9,8 +9,8 @@
 }
 
 .logo {
-  font-size: 2rem;
-  color: white;
+  font-size: 2.7rem;
+  color: #edf1ff;
 }
 
 .nav ul {
@@ -18,11 +18,13 @@
   display: flex;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav li {
   margin-left: 1.5rem;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
+  align-items: center;
 }
 
 .nav a {
@@ -34,4 +36,9 @@
 .nav a:active,
 .nav a.active {
   color: #e6fcfc;
+}
+
+.greeting {
+  font-size: 1.2rem;
+  color: #edf1ff;
 }

@@ -1,8 +1,17 @@
-.practiceItem {
+.errorItemSolved {
   margin: 2rem 0;
   font-size: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 6px solid #ccccff;
+  background-color: chartreuse;
+}
+
+.errorItemNotSolved {
+  margin: 2rem 0;
+  font-size: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 6px solid #ccccff;
+  background-color: red;
 }
 
 .link {
