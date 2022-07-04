@@ -1,25 +1,32 @@
 .spinner {
+  margin-top: 100px;
+  color: #003d80;
+  text-align: center;
+}
+
+.spinner h3 {
+  font: 2em;
+  margin-bottom: 40px;
+}
+
+.loading {
   display: inline-block;
-  width: 80px;
-  height: 80px;
-  align-self: center;
-}
-.spinner:after {
-  content: " ";
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 8px;
+  width: 64px;
+  height: 64px;
+  border: 7px solid #EDF1FF;
   border-radius: 50%;
-  border: 9px solid #ccccff;
-  border-color: #ccccff transparent #edf1ff transparent;
-  animation: spinner 1.2s linear infinite;
+  border-top-color: #003d80;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
 }
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
   }
-  100% {
-    transform: rotate(360deg);
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
   }
 }

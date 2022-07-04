@@ -10,9 +10,11 @@ const MainNavigation: React.FC = () => {
   const currentUserData = useAuthState();
   const dispatch = useAuthDispatch();
 
-  const GREETING: string =
-    "Welcome, " +
-    (currentUserData.user.length > 0 ? ` ${currentUserData.user}` : "stranger");
+  const greeting: string = `Welcome, ${
+    currentUserData.userEmail && currentUserData.userEmail.length > 0
+      ? currentUserData.userEmail
+      : "stranger"
+  }`;
 
   const logoutHandler = () => {
     logoutUser(dispatch);
@@ -24,39 +26,45 @@ const MainNavigation: React.FC = () => {
 
       <nav className={styles.nav}>
         <ul>
-          <li>
-            <NavLink
-              to="/home"
-              className={(navData) => (navData.isActive ? styles.active : "")}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/goodPractices"
-              className={(navData) => (navData.isActive ? styles.active : "")}
-            >
-              Good practices
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/commonErrors"
-              className={(navData) => (navData.isActive ? styles.active : "")}
-            >
-              Common errors
-            </NavLink>
-          </li>
-          <li className={styles.greeting}>{GREETING}</li>
-          <li>
-            {currentUserData.token && (
+          {currentUserData.userToken && (
+            <li>
+              <NavLink
+                to="/home"
+                className={(navData) => (navData.isActive ? styles.active : "")}
+              >
+                Home
+              </NavLink>
+            </li>
+          )}
+
+          {currentUserData.userToken && (
+            <li>
+              <NavLink
+                to="/goodPractices"
+                className={(navData) => (navData.isActive ? styles.active : "")}
+              >
+                Good practices
+              </NavLink>
+            </li>
+          )}
+          {currentUserData.userToken && (
+            <li>
+              <NavLink
+                to="/commonErrors"
+                className={(navData) => (navData.isActive ? styles.active : "")}
+              >
+                Common errors
+              </NavLink>
+            </li>
+          )}
+          <li className={styles.greeting}>{greeting}</li>
+          {currentUserData.userToken ? (
+            <li>
               <Button type="button" onClick={logoutHandler}>
                 Logout
               </Button>
-            )}
-          </li>
-          {!currentUserData.token && (
+            </li>
+          ) : (
             <li>
               <Link to="/auth">Login</Link>
             </li>

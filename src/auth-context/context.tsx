@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useReducer } from "react";
-import { Action } from "./actions";
-import { initialState, AuthReducer } from "./reducer";
+import { Action } from "../models/Auth";
+import { initialState, AuthReducer } from "./authReducer";
 
 const AuthStateContext = React.createContext(initialState);
 const AuthDispatchContext = React.createContext<React.Dispatch<Action>>(
@@ -18,7 +18,7 @@ export const useAuthState = () => {
 
 export const useAuthDispatch = () => {
   const context = React.useContext(AuthDispatchContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuthDispatch must be used within a AuthProvider");
   }
 

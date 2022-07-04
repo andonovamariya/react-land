@@ -1,7 +1,6 @@
 import GoodPractice from "../models/goodPractice.model";
 
-const FIREBASE_DOMAIN: string =
-  "https://react-land-blog-default-rtdb.europe-west1.firebasedatabase.app";
+import { FIREBASE_DOMAIN } from "../config/apis";
 
 export const getAllPractices: () => Promise<GoodPractice[]> = async () => {
   const response: Response = await fetch(
@@ -51,7 +50,9 @@ export const getOnePractice: (
   return loadedPractice;
 };
 
-export const addPractice = async (practiceInputData: GoodPractice) => {
+export const addPractice: (
+  practiceInputData: GoodPractice
+) => Promise<void> = async (practiceInputData: GoodPractice) => {
   const response: Response = await fetch(
     `${FIREBASE_DOMAIN}/goodPractices.json`,
     {

@@ -5,12 +5,11 @@ interface HighlightedPracticeProps {
   description: string;
 }
 
-const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
-  return (
-    <figure className={styles.singlePractice}>
-      <figcaption>{props.title}</figcaption>
-      <p>{props.description}</p>
-    </figure>
-  );
-};
+const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => (
+  <div className={styles.singlePractice}>
+    <h3>{props.title}</h3>
+    <p>{props.description}</p>
+  </div>
+);
+
 export default HighlightedPractice;

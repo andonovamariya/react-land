@@ -6,8 +6,8 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import styles from "./NewPracticeForm.module.css";
 
 export interface InputtedData {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 }
 
 interface NewPracticeFormProps {
@@ -22,42 +22,40 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
   function submitFormHandler(event: FormEvent) {
     event.preventDefault();
 
-    const enteredTitle: string = titleInputRef.current!.value;
-    const enteredDescription: string = descriptionTextareaRef.current!.value;
+    const enteredTitle: string | undefined = titleInputRef.current?.value;
+    const enteredDescription: string | undefined =
+      descriptionTextareaRef.current?.value;
 
-    const inputtedData: InputtedData = {
+    props.onAddPractice({
       title: enteredTitle,
       description: enteredDescription,
-    };
-
-    props.onAddPractice(inputtedData);
+    });
   }
   return (
-    <Card>
-      <form
-        className={styles.addPracticeForm}
-        onSubmit={submitFormHandler}
-      >
-        {props.isLoading && <LoadingSpinner />}
-        <div className={styles.control}>
-          <label htmlFor="title">Title</label>
-          <input type="title" id="title" ref={titleInputRef} />
-        </div>
-        <div className={styles.control}>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            rows={10}
-            ref={descriptionTextareaRef}
-          ></textarea>
-        </div>
-        <div className={styles.actions}>
-          <Button className="button" type="submit">
-            Add good practice
-          </Button>
-        </div>
-      </form>
-    </Card>
+    <>
+      {props.isLoading && <LoadingSpinner />}
+      <Card>
+        <form className={styles.addPracticeForm} onSubmit={submitFormHandler}>
+          <div className={styles.control}>
+            <label htmlFor="title">Title</label>
+            <input type="title" id="title" ref={titleInputRef} />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              rows={10}
+              ref={descriptionTextareaRef}
+            ></textarea>
+          </div>
+          <div className={styles.actions}>
+            <Button className="button" type="submit">
+              Add good practice
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </>
   );
 };
 

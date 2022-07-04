@@ -1,4 +1,4 @@
-.notFoundContainer {
+.notFoundPage {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.notFoundContainer p {
+.notFoundPage p {
   color: #ccccff;
   font-weight: 1000;
   font-size: 30px;
@@ -14,21 +14,21 @@
   text-align: center;
 }
 
-.notFoundContainer .main-image {
+.notFoundPage .main-image {
   width: 100%;
   height: 60rem;
   z-index: 0;
   overflow: hidden;
 }
 
-.notFoundContainer .main-image img {
+.notFoundPage .main-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
 
-.notFoundContainer h1 {
+.notFoundPage h1 {
   padding: 60px;
   text-align: center;
   background: #ccccff;

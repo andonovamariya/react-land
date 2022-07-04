@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import ErrorsList from "../../components/CommonErrors/ErrorsList";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { COMPLETED, PENDING } from "../../constants/httpStatuses";
-import useHttp from "../../hooks/use-http";
-import { getAllCommonErrors } from "../../lib/api-common-errors";
+import { COMPLETED, PENDING } from "../../enums/httpStatuses";
+import useHttp from "../../hooks/useHttp";
+import { getAllCommonErrors } from "../../services/api-common-errors";
 
 import styles from "./index.module.css";
 

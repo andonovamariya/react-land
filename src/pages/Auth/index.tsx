@@ -12,7 +12,7 @@ const Authenticate: React.FC = () => {
   const currentUserData = useAuthState();
 
   const [isLogin, setIsLogin] = useState<boolean>(true);
-  const AUTHENTICATION_METHOD: string = isLogin ? "LOGIN" : "SIGNUP";
+  const authenticationMethod: string = isLogin ? "LOGIN" : "SIGNUP";
 
   const switchAuthenticationModeHandler = () => {
     setIsLogin((previousState) => !previousState);
@@ -30,7 +30,7 @@ const Authenticate: React.FC = () => {
     const authenticationPayload = {
       enteredEmail,
       enteredPassword,
-      AUTHENTICATION_METHOD,
+      authenticationMethod,
     };
 
     try {
@@ -63,12 +63,12 @@ const Authenticate: React.FC = () => {
           />
         </div>
         <div className={styles.actions}>
-          {!currentUserData.loading && (
+          {!currentUserData.isLoading && (
             <Button type="submit">
               {isLogin ? "Login" : "Create an account"}
             </Button>
           )}
-          {currentUserData.loading && <p>Sending a request to the server...</p>}
+          {currentUserData.isLoading && <p>Sending a request to the server...</p>}
           <Button
             type="button"
             className={styles.toggle}

@@ -6,19 +6,17 @@ interface ErrorsListProps {
   errors: Error[];
 }
 
-const ErrorsList: React.FC<ErrorsListProps> = (props) => {
-  return (
-    <ul className={styles.commonErrors}>
-      {props.errors.map((error) => (
-        <ErrorItem
-          key={error.id}
-          id={error.id}
-          title={error.title}
-          status={error.isSolved}
-        />
-      ))}
-    </ul>
-  );
-};
+const ErrorsList: React.FC<ErrorsListProps> = (props) => (
+  <ul className={styles.commonErrors}>
+    {props.errors.map((error) => (
+      <ErrorItem
+        key={error.id}
+        id={error.id}
+        title={error.title}
+        status={error.isSolved}
+      />
+    ))}
+  </ul>
+);
 
 export default ErrorsList;

@@ -7,18 +7,12 @@ interface PracticeListProps {
   practices: GoodPractice[];
 }
 
-const PracticesList: React.FC<PracticeListProps> = (props) => {
-  return (
-    <ul className={styles.goodPracticesList}>
-      {props.practices.map((practice) => (
-        <PracticeItem
-          key={practice.id}
-          id={practice.id}
-          title={practice.title}
-        />
-      ))}
-    </ul>
-  );
-};
+const PracticesList: React.FC<PracticeListProps> = (props) => (
+  <ul className={styles.goodPracticesList}>
+    {props.practices.map((practice) => (
+      <PracticeItem key={practice.id} id={practice.id} title={practice.title} />
+    ))}
+  </ul>
+);
 
 export default PracticesList;

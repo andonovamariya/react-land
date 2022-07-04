@@ -4,14 +4,18 @@ import { useNavigate } from "react-router";
 import NewPracticeForm, {
   InputtedData,
 } from "../../components/GoodPractices/NewPracticeForm";
-import useHttp from "../../hooks/use-http";
-import { addPractice } from "../../lib/api-good-practices";
+import useHttp from "../../hooks/useHttp";
+import { addPractice } from "../../services/api-good-practices";
 
-import { COMPLETED, PENDING } from "../../constants/httpStatuses";
+import { COMPLETED } from "../../enums/httpStatuses";
 
 const AddNewPracticePage: React.FC = () => {
-  const { sendRequest, status } = useHttp(addPractice);
+  const { sendRequest, status } = useHttp(addPractice, true);
   const navigate = useNavigate();
+
+  const addPracticeHandler = (practiceData: InputtedData) => {
+    sendRequest(practiceData);
+  };
 
   useEffect(() => {
     if (status === COMPLETED) {
@@ -19,13 +23,9 @@ const AddNewPracticePage: React.FC = () => {
     }
   }, [status, navigate]);
 
-  const addPracticeHandler = (practiceData: InputtedData) => {
-    sendRequest(practiceData);
-  };
-
   return (
     <NewPracticeForm
-      isLoading={status === PENDING}
+      isLoading={status === COMPLETED}
       onAddPractice={addPracticeHandler}
     />
   );

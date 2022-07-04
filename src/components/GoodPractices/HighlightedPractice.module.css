@@ -5,7 +5,6 @@
   padding: 3rem;
   margin: 3rem auto;
   width: 90%;
-  max-width: 40rem;
 }
 
 .singlePractice p {
@@ -13,10 +12,10 @@
   color: #003d80;
 }
 
-.singlePractice figcaption {
+.singlePractice h3 {
   font-style: italic;
   font-size: 1.5rem;
-  text-align: right;
+  text-align: center;
   color: #003d80;
 }
 

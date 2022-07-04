@@ -5,8 +5,8 @@ interface Error {
   title: string;
   description: string;
   isSolved: boolean;
-  author: User | "";
-  fixer: User | "";
+  author: User;
+  fixer: User;
 }
 
 export default Error;

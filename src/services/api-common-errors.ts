@@ -1,7 +1,5 @@
+import { FIREBASE_DOMAIN } from "../config/apis";
 import CommonError from "../models/commonError.model";
-
-const FIREBASE_DOMAIN: string =
-  "https://react-land-blog-default-rtdb.europe-west1.firebasedatabase.app";
 
 export const getAllCommonErrors: () => Promise<CommonError[]> = async () => {
   const response: Response = await fetch(
@@ -23,6 +21,15 @@ export const getAllCommonErrors: () => Promise<CommonError[]> = async () => {
     };
     transformedErrors.push(commonErrorObject);
   }
+
+  // const transformedErrors: CommonError[] = responseCommonErrorsData.reduce(
+  //   (currentValue: CommonError, key: string) => {
+  //     currentValue.id += responseCommonErrorsData[key];
+  //     return currentValue;
+  //   },
+  //   []
+  // );
+
   return transformedErrors;
 };
 

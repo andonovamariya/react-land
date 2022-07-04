@@ -1,16 +1,19 @@
 import { useReducer, useCallback } from "react";
 
-import { PENDING, COMPLETED } from "../constants/httpStatuses";
-import { SEND, SUCCESS, ERROR } from "../constants/actionTypes";
+import reducerActions from "../enums/useHttpActions";
+import { SEND, SUCCESS, ERROR } from "../enums/useHttpActions";
+import HttpStatuses from "../enums/httpStatuses";
+import { COMPLETED, PENDING } from "../enums/httpStatuses";
+import { getErrorMessage } from "../helpers";
 
 interface State {
-  status: string;
+  status: HttpStatuses;
   responseData?: any[];
   errorMessage?: string;
 }
 
 interface Action {
-  type: string;
+  type: reducerActions;
   data?: any[];
   errorMessage?: string;
 }
@@ -43,7 +46,7 @@ type RequestFunction = (requestData: any) => any;
 
 interface ReturnUseHttp {
   sendRequest: (arg?: any) => Promise<void>;
-  status: string;
+  status: HttpStatuses;
   responseData?: any;
   errorMessage?: string;
 }
@@ -53,7 +56,7 @@ const useHttp = (
   startWithPending: boolean = false
 ): ReturnUseHttp => {
   const [httpState, dispatch] = useReducer(httpReducer, {
-    status: startWithPending ? PENDING : "",
+    status: startWithPending ? PENDING : COMPLETED,
     responseData: [],
     errorMessage: "",
   });
@@ -78,13 +81,6 @@ const useHttp = (
     sendRequest,
     ...httpState,
   };
-};
-
-const getErrorMessage = (error: unknown): string | undefined => {
-  if (error instanceof Error) {
-    return String(error);
-  }
-  return;
 };
 
 export default useHttp;
