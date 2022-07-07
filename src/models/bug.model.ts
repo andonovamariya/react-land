@@ -1,6 +1,6 @@
 import User from "./user.model";
 
-interface Error {
+interface Bug {
   id: string;
   title: string;
   description: string;
@@ -9,4 +9,4 @@ interface Error {
   fixer: User;
 }
 
-export default Error;
+export default Bug;

@@ -1,6 +1,6 @@
 import GoodPractice from "../models/goodPractice.model";
 
-import { FIREBASE_DOMAIN } from "../config/apis";
+import { FIREBASE_DOMAIN } from "../config/api";
 
 export const getAllPractices: () => Promise<GoodPractice[]> = async () => {
   const response: Response = await fetch(
@@ -50,9 +50,28 @@ export const getOnePractice: (
   return loadedPractice;
 };
 
+export const deletePractice: (practiceId: string) => Promise<void> = async (
+  practiceId: string
+) => {
+  const response = await fetch(
+    `${FIREBASE_DOMAIN}/goodPractices/${practiceId}.json`,
+    {
+      method: "DELETE",
+      body: JSON.stringify(practiceId),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const responseData = await response.json();
+  if (!response.ok) {
+    throw new Error(responseData.message || "Could not delete practice.");
+  }
+};
+
 export const addPractice: (
   practiceInputData: GoodPractice
-) => Promise<void> = async (practiceInputData: GoodPractice) => {
+) => Promise<void> = async (practiceInputData) => {
   const response: Response = await fetch(
     `${FIREBASE_DOMAIN}/goodPractices.json`,
     {

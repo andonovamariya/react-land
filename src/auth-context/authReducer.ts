@@ -1,21 +1,16 @@
-import {
-  AUTH_ERROR,
-  AUTH_SUCCESS,
-  LOGOUT,
-  REQUEST_AUTH,
-} from "../enums/authActions";
+import AuthActions from "../enums/authActions";
 import { Action } from "../models/Auth";
 
-let currentUser: string = localStorage.getItem("currentUser")
+const currentUserEmail: string = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")!).email
   : "";
-let currentToken: string = localStorage.getItem("currentUser")
+const currentUserToken: string = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")!).idToken
   : "";
 
 export const initialState: State = {
-  userEmail: currentUser,
-  userToken: currentToken,
+  userEmail: currentUserEmail,
+  userToken: currentUserToken,
   isLoading: false,
   errorMessage: "",
 };
@@ -29,26 +24,26 @@ export interface State {
 
 export const AuthReducer = (initialState: State, action: Action): State => {
   switch (action.type) {
-    case REQUEST_AUTH:
+    case AuthActions.REQUEST_AUTH:
       return {
         ...initialState,
         isLoading: true,
       };
-    case AUTH_SUCCESS:
+    case AuthActions.AUTH_SUCCESS:
       return {
         ...initialState,
         userEmail: action.payload?.email,
         userToken: action.payload?.idToken,
         isLoading: false,
       };
-    case LOGOUT:
+    case AuthActions.LOGOUT:
       return {
         ...initialState,
         userEmail: "",
         userToken: "",
       };
 
-    case AUTH_ERROR:
+    case AuthActions.AUTH_ERROR:
       return {
         ...initialState,
         isLoading: false,

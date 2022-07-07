@@ -3,14 +3,17 @@
   height: 7rem;
   display: flex;
   padding: 0 10%;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #63a4ff;
 }
 
 .logo {
+  justify-content: left;
   font-size: 2.7rem;
+  font-weight: bolder;
   color: #edf1ff;
+  text-shadow: 2px 2px 5px #003d80;
 }
 
 .nav ul {
@@ -22,23 +25,36 @@
 }
 
 .nav li {
-  margin-left: 1.5rem;
-  font-size: 1.6rem;
-  align-items: center;
+  margin-left: 1rem;
+  font-size: 1.5rem;
 }
 
 .nav a {
   text-decoration: none;
-  color: #88dfdf;
+  font-weight: bold;
+  color: #003d80;
+  text-shadow: 2px 2px 5px #e6fcfc;
+  text-align: center;
 }
 
 .nav a:hover,
 .nav a:active,
 .nav a.active {
   color: #e6fcfc;
+  text-shadow: 2px 2px 5px #003d80;
 }
 
-.greeting {
-  font-size: 1.2rem;
+.greeting,
+.navLink {
+  font-size: 1.5rem;
   color: #edf1ff;
+  text-shadow: 2px 2px 4px #003d80;
+}
+
+.authButton {
+  justify-content: right;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  color: #edf1ff;
+  text-shadow: 2px 2px 5px #003d80;
 }

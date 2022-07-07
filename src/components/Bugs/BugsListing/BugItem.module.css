@@ -1,4 +1,4 @@
-.errorItemSolved {
+.bugItemSolved {
   margin: 2rem 0;
   font-size: 2rem;
   padding-bottom: 1.5rem;
@@ -6,7 +6,7 @@
   background-color: chartreuse;
 }
 
-.errorItemNotSolved {
+.bugItemNotSolved {
   margin: 2rem 0;
   font-size: 2rem;
   padding-bottom: 1.5rem;

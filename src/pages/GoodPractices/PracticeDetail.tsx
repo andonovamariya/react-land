@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
+
 import HighlightedPractice from "../../components/GoodPractices/HighlightedPractice";
+import { getOnePractice } from "../../services/api-good-practices";
+import useHttp from "../../hooks/useHttp";
+
+import HttpStatuses from "../../enums/httpStatuses";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { COMPLETED, PENDING } from "../../enums/httpStatuses";
-import useHttp from "../../hooks/useHttp";
-import { getOnePractice } from "../../services/api-good-practices";
-
 import styles from "./PracticeDetail.module.css";
 
 const PracticeDetail: React.FC = () => {
-  const { practiceId } = useParams();
+  type PracticeDetailParams = {
+    practiceId: string;
+  };
+  const { practiceId } = useParams<PracticeDetailParams>();
 
   const {
     sendRequest,
@@ -23,7 +27,7 @@ const PracticeDetail: React.FC = () => {
     sendRequest(practiceId);
   }, [sendRequest, practiceId]);
 
-  if (status === PENDING) {
+  if (status === HttpStatuses.PENDING) {
     return (
       <Card>
         <LoadingSpinner />
@@ -36,12 +40,13 @@ const PracticeDetail: React.FC = () => {
       {errorMessage && (
         <p className={styles.errorTextPractices}>{errorMessage}</p>
       )}
-      {!loadedPractice.description && status === COMPLETED ? (
+      {!loadedPractice.description && status === HttpStatuses.COMPLETED ? (
         <p className={styles.warningTextPractices}>
           No description found for that particular practice!
         </p>
       ) : (
         <HighlightedPractice
+          practiceId={loadedPractice.id}
           title={loadedPractice.title}
           description={loadedPractice.description}
         />

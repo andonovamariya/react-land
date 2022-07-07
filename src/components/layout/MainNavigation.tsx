@@ -1,5 +1,4 @@
 import { logoutUser, useAuthDispatch, useAuthState } from "../../auth-context";
-import { Link } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
 
@@ -26,47 +25,63 @@ const MainNavigation: React.FC = () => {
 
       <nav className={styles.nav}>
         <ul>
+          <li>
+            <NavLink
+              to="/home"
+              className={(navData) =>
+                navData.isActive ? styles.active : styles.navLink
+              }
+            >
+              Home
+            </NavLink>
+          </li>
           {currentUserData.userToken && (
-            <li>
-              <NavLink
-                to="/home"
-                className={(navData) => (navData.isActive ? styles.active : "")}
-              >
-                Home
-              </NavLink>
-            </li>
-          )}
+            <>
+              <li>
+                <NavLink
+                  to="/goodPractices"
+                  className={(navData) =>
+                    navData.isActive ? styles.active : styles.navLink
+                  }
+                >
+                  Good practices
+                </NavLink>
+              </li>
 
-          {currentUserData.userToken && (
-            <li>
-              <NavLink
-                to="/goodPractices"
-                className={(navData) => (navData.isActive ? styles.active : "")}
-              >
-                Good practices
-              </NavLink>
-            </li>
-          )}
-          {currentUserData.userToken && (
-            <li>
-              <NavLink
-                to="/commonErrors"
-                className={(navData) => (navData.isActive ? styles.active : "")}
-              >
-                Common errors
-              </NavLink>
-            </li>
+              <li>
+                <NavLink
+                  to="/bugs"
+                  className={(navData) =>
+                    navData.isActive ? styles.active : styles.navLink
+                  }
+                >
+                  Bugs
+                </NavLink>
+              </li>
+            </>
           )}
           <li className={styles.greeting}>{greeting}</li>
-          {currentUserData.userToken ? (
+
+          {currentUserData.userToken !== "" ? (
             <li>
-              <Button type="button" onClick={logoutHandler}>
+              <Button
+                type="button"
+                onClick={logoutHandler}
+                className={styles.authButton}
+              >
                 Logout
               </Button>
             </li>
           ) : (
             <li>
-              <Link to="/auth">Login</Link>
+              <NavLink
+                to="/login"
+                className={(navData) =>
+                  navData.isActive ? styles.active : styles.navLink
+                }
+              >
+                Login
+              </NavLink>
             </li>
           )}
         </ul>

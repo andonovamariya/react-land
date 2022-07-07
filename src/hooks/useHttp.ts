@@ -1,9 +1,7 @@
 import { useReducer, useCallback } from "react";
 
-import reducerActions from "../enums/useHttpActions";
-import { SEND, SUCCESS, ERROR } from "../enums/useHttpActions";
+import ReducerActions from "../enums/useHttpActions";
 import HttpStatuses from "../enums/httpStatuses";
-import { COMPLETED, PENDING } from "../enums/httpStatuses";
 import { getErrorMessage } from "../helpers";
 
 interface State {
@@ -13,28 +11,28 @@ interface State {
 }
 
 interface Action {
-  type: reducerActions;
+  type: ReducerActions;
   data?: any[];
   errorMessage?: string;
 }
 
 const httpReducer = (initialState: State, action: Action): State => {
   switch (action.type) {
-    case SEND:
+    case ReducerActions.SEND:
       return {
         ...initialState,
-        status: PENDING,
+        status: HttpStatuses.PENDING,
       };
-    case SUCCESS:
+    case ReducerActions.SUCCESS:
       return {
         ...initialState,
-        status: COMPLETED,
+        status: HttpStatuses.COMPLETED,
         responseData: action.data,
       };
-    case ERROR:
+    case ReducerActions.ERROR:
       return {
         ...initialState,
-        status: COMPLETED,
+        status: HttpStatuses.COMPLETED,
         errorMessage: getErrorMessage(action.errorMessage),
       };
     default:
@@ -56,20 +54,20 @@ const useHttp = (
   startWithPending: boolean = false
 ): ReturnUseHttp => {
   const [httpState, dispatch] = useReducer(httpReducer, {
-    status: startWithPending ? PENDING : COMPLETED,
+    status: startWithPending ? HttpStatuses.PENDING : HttpStatuses.COMPLETED,
     responseData: [],
     errorMessage: "",
   });
 
   const sendRequest = useCallback(
     async (requestData: any) => {
-      dispatch({ type: SEND });
+      dispatch({ type: ReducerActions.SEND });
       try {
         const responseData = await requestFunction(requestData);
-        dispatch({ type: SUCCESS, data: responseData });
+        dispatch({ type: ReducerActions.SUCCESS, data: responseData });
       } catch (error) {
         dispatch({
-          type: ERROR,
+          type: ReducerActions.ERROR,
           errorMessage: getErrorMessage(error),
         });
       }

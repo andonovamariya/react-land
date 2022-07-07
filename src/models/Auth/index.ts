@@ -1,9 +1,10 @@
 import AuthActions from "../../enums/authActions";
+import AuthMethod from "../../enums/authMethod";
 
-export interface LoginPayload {
+export interface AuthenticatePayload {
   enteredEmail: string;
   enteredPassword: string;
-  authenticationMethod: string;
+  authenticationMethod: AuthMethod;
 }
 
 export interface Action {

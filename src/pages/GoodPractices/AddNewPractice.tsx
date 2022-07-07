@@ -1,31 +1,31 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
+import HttpStatuses from "../../enums/httpStatuses";
 import NewPracticeForm, {
-  InputtedData,
+  InputtedDataPractices,
 } from "../../components/GoodPractices/NewPracticeForm";
 import useHttp from "../../hooks/useHttp";
 import { addPractice } from "../../services/api-good-practices";
 
-import { COMPLETED } from "../../enums/httpStatuses";
 
 const AddNewPracticePage: React.FC = () => {
   const { sendRequest, status } = useHttp(addPractice, true);
   const navigate = useNavigate();
 
-  const addPracticeHandler = (practiceData: InputtedData) => {
+  const addPracticeHandler = (practiceData: InputtedDataPractices) => {
     sendRequest(practiceData);
   };
 
   useEffect(() => {
-    if (status === COMPLETED) {
+    if (status === HttpStatuses.COMPLETED) {
       navigate("/goodPractices");
     }
   }, [status, navigate]);
 
   return (
     <NewPracticeForm
-      isLoading={status === COMPLETED}
+      isLoading={status === HttpStatuses.COMPLETED}
       onAddPractice={addPracticeHandler}
     />
   );

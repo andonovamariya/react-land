@@ -6,7 +6,7 @@ import Layout from "./layout/Layout";
 
 const AppRoutes = () => {
   const currentUserData = useAuthState();
-  const isUserLogged: boolean = currentUserData.userToken ? true : false;
+  const isUserLogged: boolean = currentUserData && currentUserData.userToken !== "" ? true : false;
 
   return (
     <Layout>
@@ -17,7 +17,7 @@ const AppRoutes = () => {
             path={route.path}
             element={
               route.isPrivate && !Boolean(isUserLogged) ? (
-                <Navigate to={{ pathname: "/auth" }} />
+                <Navigate to={{ pathname: "/home" }} />
               ) : (
                 <route.element />
               )

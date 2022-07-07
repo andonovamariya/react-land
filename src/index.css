@@ -2,7 +2,6 @@
   font-family: "PoppinsRegular";
   src: local("PoppinsRegular"),
     url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
-  font-weight: bold;
 }
 
 ul {

@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+
 import styles from "./Card.module.css";
 
 const Card: React.FC<PropsWithChildren> = ({ children }) => {

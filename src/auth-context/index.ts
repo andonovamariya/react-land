@@ -1,6 +1,4 @@
-// simply exports the contents of the three other files
-
-import { loginUser, logoutUser } from "./authActions";
+import { authenticateUser, logoutUser } from "./authActions";
 import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
 
-export { AuthProvider, useAuthState, useAuthDispatch, loginUser, logoutUser };
+export { AuthProvider, useAuthState, useAuthDispatch, authenticateUser, logoutUser };

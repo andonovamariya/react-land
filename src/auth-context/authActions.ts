@@ -1,19 +1,16 @@
-import { LOGIN_API, REGISTER_API } from "../config/apis";
-import {
-  AUTH_ERROR,
-  AUTH_SUCCESS,
-  LOGOUT,
-  REQUEST_AUTH,
-} from "../enums/authActions";
+import React from "react";
+import AuthMethod from "../enums/authMethod";
+import AuthActions from "../enums/authActions";
+import { Action, AuthenticatePayload } from "../models/Auth";
 import { getErrorMessage } from "../helpers";
-import { Action, LoginPayload } from "../models/Auth";
 
-export const loginUser: (
+
+export const authenticateUser: (
   dispatch: React.Dispatch<Action>,
-  payload: LoginPayload
+  payload: AuthenticatePayload
 ) => Promise<any> = async (
   dispatch: React.Dispatch<Action>,
-  payload: LoginPayload
+  payload: AuthenticatePayload
 ) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
@@ -29,41 +26,40 @@ export const loginUser: (
     },
   };
 
-  let api_url: string =
-    authenticationMethod === "LOGIN" ? LOGIN_API : REGISTER_API;
-
   try {
-    dispatch({ type: REQUEST_AUTH });
-    const response = await fetch(api_url, requestDetails);
+    dispatch({ type: AuthActions.REQUEST_AUTH });
+
+    const response = await fetch(
+      authenticationMethod === AuthMethod.LOGIN
+        ? AuthMethod.LOGIN
+        : AuthMethod.REGISTER,
+      requestDetails
+    );
 
     if (response.ok) {
       const responseData = await response.json();
 
-      dispatch({ type: AUTH_SUCCESS, payload: responseData });
-      console.log(responseData);
+      dispatch({ type: AuthActions.AUTH_SUCCESS, payload: responseData });
       localStorage.setItem("currentUser", JSON.stringify(responseData));
-
       return responseData;
     } else {
       const responseData = await response.json();
 
-      let errorMessage = "Authentication failed";
+      let errorMessage: string = "Authentication failed";
       if (responseData && responseData.error && responseData.error.message) {
         errorMessage = responseData.error.message;
       }
 
-      dispatch({ type: AUTH_ERROR, error: errorMessage });
-      console.log(errorMessage);
+      dispatch({ type: AuthActions.AUTH_ERROR, error: errorMessage });
       return errorMessage;
     }
   } catch (error) {
-    dispatch({ type: AUTH_ERROR, error: getErrorMessage(error) });
-    console.log(error);
+    dispatch({ type: AuthActions.AUTH_ERROR, error: getErrorMessage(error) });
+    return getErrorMessage(error);
   }
 };
 
 export const logoutUser = (dispatch: React.Dispatch<Action>): void => {
-  dispatch({ type: LOGOUT });
+  dispatch({ type: AuthActions.LOGOUT });
   localStorage.removeItem("currentUser");
-  localStorage.removeItem("token");
 };

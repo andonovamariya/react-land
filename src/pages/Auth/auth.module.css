@@ -2,46 +2,12 @@
   margin: 3rem auto;
   width: 95%;
   max-width: 25rem;
-  border-radius: 22px;
+  border-radius: 6px;
   background-color: #63a4ff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   text-align: center;
   color: #edf1ff;
-}
-
-.auth h1 {
-  text-align: center;
-  color: #edf1ff;
-}
-
-.control {
-  margin-bottom: 0.5rem;
-}
-
-.control label {
-  display: block;
-  color: #edf1ff;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.control input {
-  font: inherit;
-  background-color: #edf1ff;
-  color: #003d80;
-  border-radius: 22px;
-  border: 1px solid #ccccff;
-  width: 100%;
-  text-align: left;
-  padding: 0.25rem;
-}
-
-.actions {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .actions .toggle {
@@ -55,4 +21,18 @@
 .actions .toggle:hover {
   background-color: transparent;
   color: #ccccff;
+}
+
+.authLink {
+  cursor: pointer;
+  font: inherit;
+  color: #003d80;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+h3 {
+  color: #003d80;
+  text-indent: 5%;
+  font-size: 2.2rem;
 }
