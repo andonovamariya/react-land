@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import NewBugForm, {
   InputtedDataBugs,
-} from "../../components/Bugs/Contribute/NewBugForm";
+} from "../../components/Bugs/Contribute/NewBug";
 import HttpStatuses from "../../enums/httpStatuses";
 import useHttp from "../../hooks/useHttp";
 import { addBug } from "../../services/api-bugs";

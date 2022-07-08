@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   useAuthState,
@@ -7,6 +7,7 @@ import {
 } from "../../auth-context";
 import AuthMethod from "../../enums/authMethod";
 import Button from "../UI/Button";
+import AuthActions from "../../enums/authActions";
 
 import styles from "./auth.module.css";
 
@@ -30,19 +31,32 @@ const LoginUser: React.FC = () => {
   const submitLoginHandler = async (event: FormEvent) => {
     event.preventDefault();
 
-    const enteredEmail: string = inputRefEmail.current!.value;
-    const enteredPassword: string = inputRefPassword.current!.value;
+    if (inputRefEmail.current && inputRefPassword.current) {
+      const enteredEmail: string = inputRefEmail.current.value;
+      const enteredPassword: string = inputRefPassword.current.value;
 
-    await authenticateUser(dispatch, {
-      enteredEmail,
-      enteredPassword,
-      authenticationMethod: AuthMethod.LOGIN,
-    });
-
-    if (!currentUserData.errorMessage) {
-      navigate("/home");
+      await authenticateUser(dispatch, {
+        enteredEmail,
+        enteredPassword,
+        authenticationMethod: AuthMethod.LOGIN,
+      });
+    }
+    if (
+      errorMessage?.authErrorMessage === "" &&
+      errorMessage?.serverErrorMessage === ""
+    ) {
+      navigate("/home", { replace: true });
     }
   };
+
+  const { errorMessage } = currentUserData;
+
+  // cleaning up errors
+  useEffect(() => {
+    return () => {
+      dispatch({ type: AuthActions.AUTH_ERROR, error: undefined });
+    };
+  }, [dispatch]);
 
   return (
     <form onSubmit={submitLoginHandler} onFocus={beginEnteringHandler}>
@@ -73,9 +87,18 @@ const LoginUser: React.FC = () => {
         {currentUserData.isLoading && (
           <p>Sending a login request to the server...</p>
         )}
-        {currentUserData.errorMessage && !isEntering && (
-          <p className={styles.errorText}>{currentUserData.errorMessage}</p>
-        )}
+        {errorMessage &&
+          errorMessage.authErrorMessage !== "" &&
+          !isEntering && (
+            <p className={styles.errorText}>{errorMessage.authErrorMessage}</p>
+          )}
+        {errorMessage &&
+          errorMessage.serverErrorMessage !== "" &&
+          !isEntering && (
+            <p className={styles.errorText}>
+              {errorMessage.serverErrorMessage}
+            </p>
+          )}
       </div>
     </form>
   );

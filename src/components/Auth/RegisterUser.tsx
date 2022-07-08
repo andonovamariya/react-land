@@ -29,14 +29,15 @@ const Register: React.FC = () => {
 
   const submitRegisterHandler = async (event: FormEvent) => {
     event.preventDefault();
-    const enteredEmail: string = inputRefEmail.current!.value;
-    const enteredPassword: string = inputRefPassword.current!.value;
-
-    await authenticateUser(dispatch, {
-      enteredEmail,
-      enteredPassword,
-      authenticationMethod: AuthMethod.REGISTER,
-    });
+    if (inputRefEmail.current && inputRefPassword.current) {
+      const enteredEmail: string = inputRefEmail.current.value;
+      const enteredPassword: string = inputRefPassword.current.value;
+      await authenticateUser(dispatch, {
+        enteredEmail,
+        enteredPassword,
+        authenticationMethod: AuthMethod.REGISTER,
+      });
+    }
 
     if (!currentUserData.errorMessage) {
       navigate("/home");
@@ -72,8 +73,15 @@ const Register: React.FC = () => {
         {currentUserData.isLoading && (
           <p>Sending a register request to the server...</p>
         )}
-        {currentUserData.errorMessage && !isEntering && (
-          <p className={styles.errorText}>{currentUserData.errorMessage}</p>
+        {currentUserData.errorMessage?.authErrorMessage && !isEntering && (
+          <p className={styles.errorText}>
+            {currentUserData.errorMessage.authErrorMessage}
+          </p>
+        )}
+        {currentUserData.errorMessage?.serverErrorMessage && !isEntering && (
+          <p className={styles.errorText}>
+            {currentUserData.errorMessage.serverErrorMessage}
+          </p>
         )}
       </div>
     </form>

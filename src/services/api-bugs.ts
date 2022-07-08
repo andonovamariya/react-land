@@ -65,3 +65,8 @@ export const addBug: (bugInputData: Bug) => Promise<void> = async (
     throw new Error(responseBugsData.message || "Could not add a new bug.");
   }
 };
+
+
+// export const addSolution: ({bugId: string, fixerId: string, solution: string}) => Promise<void> = async (bugId, fixerId, solution) => {
+
+// };

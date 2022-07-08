@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import SolvedBug from "../../components/Bugs/BugsListing/SolvedBug";
 import UnsolvedBug, {
   InputtedSolutionData,
-} from "../../components/Bugs/BugsListing/UnsolvedBug";
+} from "../../components/Bugs/Contribute/UnsolvedBug";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../enums/httpStatuses";
@@ -59,7 +59,7 @@ const BugDetail: React.FC = () => {
           fixer={loadedBug.fixer}
         />
       ) : (
-        <UnsolvedBug onAddSolution={addSolutionHandler} />
+        <UnsolvedBug onAddSolution={addSolutionHandler} bugId = {bugId}/>
       )}
     </>
   );

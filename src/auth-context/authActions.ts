@@ -4,14 +4,10 @@ import AuthActions from "../enums/authActions";
 import { Action, AuthenticatePayload } from "../models/Auth";
 import { getErrorMessage } from "../helpers";
 
-
 export const authenticateUser: (
   dispatch: React.Dispatch<Action>,
   payload: AuthenticatePayload
-) => Promise<any> = async (
-  dispatch: React.Dispatch<Action>,
-  payload: AuthenticatePayload
-) => {
+) => Promise<any> = async (dispatch, payload) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
   const requestDetails = {
@@ -46,16 +42,36 @@ export const authenticateUser: (
       const responseData = await response.json();
 
       let errorMessage: string = "Authentication failed";
-      if (responseData && responseData.error && responseData.error.message) {
-        errorMessage = responseData.error.message;
+      let errorObject = { authErrorMessage: "", serverErrorMessage: "" };
+      if (responseData && responseData.error.length !== 0) {
+        errorObject.authErrorMessage = responseData.error.message;
+      } else {
+        errorObject.authErrorMessage = errorMessage;
       }
 
-      dispatch({ type: AuthActions.AUTH_ERROR, error: errorMessage });
-      return errorMessage;
+      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
+      return errorObject;
     }
   } catch (error) {
-    dispatch({ type: AuthActions.AUTH_ERROR, error: getErrorMessage(error) });
-    return getErrorMessage(error);
+    const knownError: string | undefined = getErrorMessage(error);
+    if (knownError) {
+      let errorObject = {
+        authErrorMessage: "",
+        serverErrorMessage: knownError,
+      };
+
+      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
+      return errorObject;
+    } else {
+      const serverError: string =
+        "Something went wrong with fetching the data from the server.";
+      let errorObject = {
+        authErrorMessage: "",
+        serverErrorMessage: serverError,
+      };
+      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
+      return errorObject;
+    }
   }
 };
 

@@ -37,7 +37,7 @@ const Bugs: React.FC = () => {
 
       <div className={styles.actionsListBugs}>
         <Link className={styles.linkStyleBugs} to="/addNewBug">
-          Add new bug
+          Add a new bug
         </Link>
       </div>
       <BugsList bugs={loadedBugs} />

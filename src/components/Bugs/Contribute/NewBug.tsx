@@ -5,7 +5,7 @@ import Button from "../../UI/Button";
 import Card from "../../UI/Card";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-import styles from "./NewBugForm.module.css";
+import styles from "./NewBug.module.css";
 
 export interface InputtedDataBugs {
   title?: string;
