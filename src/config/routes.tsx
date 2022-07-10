@@ -4,6 +4,7 @@ import Register from "../pages/Auth/Register";
 import Bugs from "../pages/Bugs";
 import AddNewBug from "../pages/Bugs/AddNewBug";
 import AddSolution from "../pages/Bugs/AddSolution";
+import ShowSolutions from "../pages/Bugs/ShowSolutions";
 import SolvedBugDetails from "../pages/Bugs/SolvedBugs/SolvedBugDetails";
 import UnsolvedBugDetails from "../pages/Bugs/UnsolvedBugs/UnsolvedBugDetails";
 import GoodPractices from "../pages/GoodPractices";
@@ -35,8 +36,21 @@ const routes: Route[] = [
   { path: "/bugs", element: Bugs, isPrivate: true },
   { path: "/addNewBug", element: AddNewBug, isPrivate: true },
   { path: "/solvedBugs/:bugId", element: SolvedBugDetails, isPrivate: true },
-  { path: "/unSolvedBugs/:bugId", element: UnsolvedBugDetails, isPrivate: true },
-  { path: "/unSolvedBugs/:bugId/contribute", element: AddSolution, isPrivate: true },
+  {
+    path: "/unSolvedBugs/:bugId",
+    element: UnsolvedBugDetails,
+    isPrivate: true,
+  },
+  {
+    path: "/unSolvedBugs/:bugId/contribute",
+    element: AddSolution,
+    isPrivate: true,
+  },
+  {
+    path: "/unSolvedBugs/:bugId/allSolutions",
+    element: ShowSolutions,
+    isPrivate: true,
+  },
   { path: "/*", element: NotFound, isPrivate: false },
 ];
 
