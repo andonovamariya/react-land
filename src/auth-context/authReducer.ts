@@ -1,5 +1,5 @@
 import AuthActions from "../enums/authActions";
-import { Action, AuthError } from "../models/Auth";
+import { Action, AuthenticationError } from "../models/Auth";
 
 const currentUserEmail: string = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")!).email
@@ -18,7 +18,7 @@ export interface State {
   userEmail?: string;
   userToken?: string;
   isLoading: boolean;
-  errorMessage?: AuthError;
+  errorObject?: AuthenticationError;
 }
 
 export const AuthReducer = (initialState: State, action: Action): State => {
@@ -46,7 +46,12 @@ export const AuthReducer = (initialState: State, action: Action): State => {
       return {
         ...initialState,
         isLoading: false,
-        errorMessage: action.error,
+      };
+    case AuthActions.CLEAR_ERROR:
+      return {
+        ...initialState,
+        isLoading: false,
+        errorObject: action.error,
       };
 
     default:

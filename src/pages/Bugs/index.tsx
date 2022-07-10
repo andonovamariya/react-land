@@ -5,9 +5,10 @@ import { getAllBugs } from "../../services/api-bugs";
 import BugsList from "../../components/Bugs/BugsListing/BugsList";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { isDatabaseEmpty } from "../../helpers";
+import { isDatabaseEmpty, scrollToTopHandler } from "../../helpers";
 import styles from "./index.module.css";
 import { Link } from "react-router-dom";
+import Button from "../../components/UI/Button";
 
 const Bugs: React.FC = () => {
   const {
@@ -34,13 +35,22 @@ const Bugs: React.FC = () => {
           Database records of bugs were NOT found.
         </p>
       )}
-
       <div className={styles.actionsListBugs}>
+        <div className={styles.bugImage}>
+          <img src={require("../../assets/greenBug.png")} alt="small bug" />
+        </div>
         <Link className={styles.linkStyleBugs} to="/addNewBug">
           Add a new bug
         </Link>
       </div>
       <BugsList bugs={loadedBugs} />
+      <div className={styles.actionsListBugs}>
+        <Button
+          type="button"
+          onClick={scrollToTopHandler}
+          className={styles.scrollButton}
+        />
+      </div>
     </>
   );
 };

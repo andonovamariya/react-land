@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import NewBugForm, {
-  InputtedDataBugs,
-} from "../../components/Bugs/Contribute/NewBug";
+import AddBugForm, { InputtedDataBugs } from "../../components/Bugs/ContributeBugs/NewBugForm";
 import HttpStatuses from "../../enums/httpStatuses";
 import useHttp from "../../hooks/useHttp";
 import { addBug } from "../../services/api-bugs";
@@ -22,7 +20,7 @@ const AddNewBug: React.FC = () => {
   }, [status, navigate]);
 
   return (
-    <NewBugForm
+    <AddBugForm
       onAddBug={addBugHandler}
       isLoading={status === HttpStatuses.COMPLETED}
     />

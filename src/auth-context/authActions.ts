@@ -10,6 +10,7 @@ export const authenticateUser: (
 ) => Promise<any> = async (dispatch, payload) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
+  console.log(payload);
   const requestDetails = {
     method: "POST",
     body: JSON.stringify({
@@ -53,23 +54,26 @@ export const authenticateUser: (
       return errorObject;
     }
   } catch (error) {
-    const knownError: string | undefined = getErrorMessage(error);
-    if (knownError) {
+    const availableServerError: string | undefined = getErrorMessage(error);
+    if (availableServerError) {
       let errorObject = {
         authErrorMessage: "",
-        serverErrorMessage: knownError,
+        serverErrorMessage: availableServerError,
       };
 
       dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
       return errorObject;
     } else {
-      const serverError: string =
+      const defaultServerError: string =
         "Something went wrong with fetching the data from the server.";
       let errorObject = {
         authErrorMessage: "",
-        serverErrorMessage: serverError,
+        serverErrorMessage: defaultServerError,
       };
-      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
+      dispatch({
+        type: AuthActions.AUTH_ERROR,
+        error: errorObject
+      });
       return errorObject;
     }
   }

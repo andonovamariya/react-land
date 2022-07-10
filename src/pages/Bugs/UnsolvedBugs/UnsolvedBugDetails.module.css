@@ -1,34 +1,36 @@
-.warningStyleBugs,
-.errorStyleBugs {
+.warningTextPractices,
+.errorTextPractices {
   border: 1px solid;
   margin: 10px 0px;
   padding: 15px 10px 15px 50px;
   background-repeat: no-repeat;
   background-position: 10px center;
-}
-.warningStyleBugs {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
+}
+.warningTextPractices {
   color: #9f6000;
   background-color: #feefb3;
   background-image: url("https://i.imgur.com/Z8q7ww7.png");
 }
-.errorStyleBugs {
-  text-align: center;
-  font-size: 1.5rem;
+.errorTextPractices {
   color: #d8000c;
   background-color: #ffbaba;
   background-image: url("https://i.imgur.com/GnyDvKN.png");
 }
 
-.actionsListBugs {
+.goBackButton {
+  font-size: 1.7rem;
+}
+
+.actions {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.linkStyleBugs {
+.link {
   color: #ccccff;
   background-color: #003d80;
   border-radius: 36px;
@@ -39,25 +41,7 @@
   font-size: 1.9rem;
 }
 
-.linkStyleBugs:visited {
+.link:visited {
   background-color: #92b6d5;
   color: #003d80;
-}
-
-.bugImage {
-  width: 100%;
-  height: 18rem;
-}
-
-.bugImage img {
-  object-fit: cover;
-}
-
-.scrollButton {
-  align-self: flex-end;
-  height: 6rem;
-  width: 6rem;
-  background: url("../../assets/arrow.png") no-repeat;
-  background-size: contain;
-  border: none;
 }

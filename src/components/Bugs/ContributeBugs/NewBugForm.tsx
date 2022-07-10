@@ -5,13 +5,13 @@ import Button from "../../UI/Button";
 import Card from "../../UI/Card";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-import styles from "./NewBug.module.css";
+import styles from "./NewBugForm.module.css";
 
 export interface InputtedDataBugs {
-  title?: string;
-  description?: string;
-  author?: string;
-  isSolved?: boolean;
+  title: string;
+  description: string;
+  authorEmail: string;
+  isSolved: boolean;
 }
 
 interface NewBugFormProps {
@@ -28,16 +28,21 @@ const NewBugForm: React.FC<NewBugFormProps> = (props) => {
 
   const submitFormHandler = (event: FormEvent) => {
     event.preventDefault();
-    const enteredTitle: string | undefined = titleInputRef.current?.value;
-    const enteredDescription: string | undefined =
-      descriptionTextareaRef.current?.value;
+    if (
+      titleInputRef.current &&
+      descriptionTextareaRef.current &&
+      currentUserData.userEmail
+    ) {
+      const enteredTitle: string = titleInputRef.current.value;
+      const enteredDescription: string = descriptionTextareaRef.current.value;
 
-    props.onAddBug({
-      title: enteredTitle,
-      description: enteredDescription,
-      author: currentUserData.userEmail,
-      isSolved: false,
-    });
+      props.onAddBug({
+        title: enteredTitle,
+        description: enteredDescription,
+        authorEmail: currentUserData.userEmail,
+        isSolved: false,
+      });
+    }
   };
 
   return (
@@ -47,11 +52,16 @@ const NewBugForm: React.FC<NewBugFormProps> = (props) => {
         <form className={styles.addBugForm} onSubmit={submitFormHandler}>
           <div className={styles.control}>
             <label htmlFor="title">Title</label>
-            <input type="title" id="title" ref={titleInputRef} />
+            <input type="title" id="title" ref={titleInputRef} required />
           </div>
           <div className={styles.control}>
             <label htmlFor="description">Description</label>
-            <textarea id="description" rows={10} ref={descriptionTextareaRef} />
+            <textarea
+              id="description"
+              rows={10}
+              ref={descriptionTextareaRef}
+              required
+            />
           </div>
           <div className={styles.actions}>
             <Button type="submit">Add bug</Button>

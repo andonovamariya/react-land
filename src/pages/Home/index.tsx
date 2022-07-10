@@ -1,7 +1,7 @@
 import reactLogo from "../../assets/reactLogo.webp";
 import styles from "./index.module.css";
 
-import "../../assets/fonts/Poppins-Italic.ttf"
+import /* webpackPreload: true */ "../../assets/fonts/Poppins-Italic.ttf";
 
 const Home: React.FC = () => (
   <div className={styles.homePage}>

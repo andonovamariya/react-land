@@ -1,10 +1,8 @@
-import User from "./user.model";
-
 interface GoodPractice {
   id: string;
   title: string;
   description: string;
-  author: User;
+  author: string;
 }
 
 export default GoodPractice;

@@ -18,6 +18,8 @@ const LoginUser: React.FC = () => {
 
   const [isEntering, setIsEntering] = useState<boolean>(false);
 
+  const { errorObject } = currentUserData;
+
   const beginEnteringHandler = () => {
     setIsEntering(true);
   };
@@ -42,19 +44,17 @@ const LoginUser: React.FC = () => {
       });
     }
     if (
-      errorMessage?.authErrorMessage === "" &&
-      errorMessage?.serverErrorMessage === ""
+      errorObject?.authErrorMessage === "" &&
+      errorObject?.serverErrorMessage === ""
     ) {
       navigate("/home", { replace: true });
     }
   };
 
-  const { errorMessage } = currentUserData;
-
-  // cleaning up errors
+  // cleaning up errors/ error state
   useEffect(() => {
     return () => {
-      dispatch({ type: AuthActions.AUTH_ERROR, error: undefined });
+      dispatch({ type: AuthActions.AUTH_ERROR });
     };
   }, [dispatch]);
 
@@ -87,17 +87,13 @@ const LoginUser: React.FC = () => {
         {currentUserData.isLoading && (
           <p>Sending a login request to the server...</p>
         )}
-        {errorMessage &&
-          errorMessage.authErrorMessage !== "" &&
+        {errorObject && errorObject.authErrorMessage !== "" && !isEntering && (
+          <p className={styles.errorText}>{errorObject.authErrorMessage}</p>
+        )}
+        {errorObject &&
+          errorObject.serverErrorMessage !== "" &&
           !isEntering && (
-            <p className={styles.errorText}>{errorMessage.authErrorMessage}</p>
-          )}
-        {errorMessage &&
-          errorMessage.serverErrorMessage !== "" &&
-          !isEntering && (
-            <p className={styles.errorText}>
-              {errorMessage.serverErrorMessage}
-            </p>
+            <p className={styles.errorText}>{errorObject.serverErrorMessage}</p>
           )}
       </div>
     </form>

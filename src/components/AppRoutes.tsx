@@ -2,7 +2,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import routes from "../config/routes";
 import { useAuthState } from "../auth-context";
-import Layout from "./layout/Layout";
+import Layout from "./Layout/Layout";
 
 const AppRoutes = () => {
   const currentUserData = useAuthState();
@@ -16,7 +16,7 @@ const AppRoutes = () => {
             key={route.path}
             path={route.path}
             element={
-              route.isPrivate && !Boolean(isUserLogged) ? (
+              route.isPrivate && !isUserLogged ? (
                 <Navigate to={{ pathname: "/home" }} />
               ) : (
                 <route.element />

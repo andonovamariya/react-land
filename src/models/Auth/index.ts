@@ -7,7 +7,7 @@ export interface AuthenticatePayload {
   authenticationMethod: AuthMethod;
 }
 
- export interface AuthError {
+export interface AuthenticationError {
   authErrorMessage?: string;
   serverErrorMessage?: string;
 }
@@ -15,7 +15,7 @@ export interface AuthenticatePayload {
 export interface Action {
   type: AuthActions;
   payload?: Payload;
-  error?: AuthError;
+  error?: AuthenticationError;
 }
 
 interface Payload {

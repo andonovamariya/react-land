@@ -19,12 +19,12 @@ const BugItem: React.FC<BugItemProps> = (props) => (
   <li className={getBugItemStyle(props.isSolved)}>
     <h3>{props.title}</h3>
     {props.isSolved ? (
-      <Link className={styles.link} to={`/bugs/${props.id}`}>
+      <Link className={styles.link} to={`/solvedBugs/${props.id}`}>
         View solving
       </Link>
     ) : (
-      <Link className={styles.link} to={`/bugs/${props.id}`}>
-        Suggest a solution
+      <Link className={styles.link} to={`/unsolvedBugs/${props.id}`}>
+        Suggested solutions
       </Link>
     )}
   </li>

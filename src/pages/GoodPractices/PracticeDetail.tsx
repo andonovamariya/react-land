@@ -49,6 +49,7 @@ const PracticeDetail: React.FC = () => {
           practiceId={loadedPractice.id}
           title={loadedPractice.title}
           description={loadedPractice.description}
+          author={loadedPractice.author}
         />
       )}
     </>

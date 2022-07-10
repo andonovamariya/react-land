@@ -88,3 +88,23 @@ export const addPractice: (
     throw new Error(responsePracticeData.message || "Could not create quote.");
   }
 };
+
+export const editPractice: (
+  practiceInputData: GoodPractice
+) => Promise<void> = async (practiceInputData) => {
+  const response: Response = await fetch(
+    `${FIREBASE_DOMAIN}/goodPractices.json`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(practiceInputData),
+      headers: {
+        authorization: "Bearer AIzaSyDm3qU1JtOeESp3PrzMQQ0L9Mv0lXvnuWc",
+        "content-type": "application/json",
+      },
+    }
+  );
+  const responseEditedPractice = await response.json();
+  if (!response.ok) {
+    throw new Error(responseEditedPractice.message || "Could not edit quote.");
+  }
+};

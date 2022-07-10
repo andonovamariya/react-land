@@ -8,7 +8,6 @@ import NewPracticeForm, {
 import useHttp from "../../hooks/useHttp";
 import { addPractice } from "../../services/api-good-practices";
 
-
 const AddNewPracticePage: React.FC = () => {
   const { sendRequest, status } = useHttp(addPractice, true);
   const navigate = useNavigate();

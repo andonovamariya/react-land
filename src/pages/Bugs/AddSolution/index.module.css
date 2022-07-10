@@ -1,0 +1,11 @@
+.solutions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #003d80;
+}

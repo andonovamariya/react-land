@@ -1,0 +1,51 @@
+.editPracticeForm {
+  width: 100%;
+  border-radius: 22px;
+  background-color: #b2e1ff;
+  box-shadow: 2px 2px 15px #003d80;
+  padding: 2rem;
+  margin: 22px auto;
+  text-align: center;
+  color: #003d80;
+}
+
+textarea {
+  resize: none;
+}
+
+.control {
+  margin-bottom: 0.5rem;
+}
+
+.control label {
+  font-weight: bolder;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.control textarea,
+input {
+  font: inherit;
+  padding: 0.35rem;
+  border-radius: 22px;
+  background-color: #edf1ff;
+  border: 1px solid #003d80;
+  display: block;
+  width: 100%;
+  font-size: 1.25rem;
+}
+
+.control input:focus,
+textarea:focus {
+  background-color: #f6e4ff;
+  outline-color: #003d80;
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}

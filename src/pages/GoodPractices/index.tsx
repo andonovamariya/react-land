@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import PracticesList from "../../components/GoodPractices/PracticesList";
+import Button from "../../components/UI/Button";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../enums/httpStatuses";
-import { isDatabaseEmpty } from "../../helpers";
+import { isDatabaseEmpty, scrollToTopHandler } from "../../helpers";
 import useHttp from "../../hooks/useHttp";
 import { getAllPractices } from "../../services/api-good-practices";
 
@@ -30,6 +31,7 @@ const GoodPractices: React.FC = () => {
     );
   }
 
+
   return (
     <>
       {errorMessage && (
@@ -42,9 +44,16 @@ const GoodPractices: React.FC = () => {
       ) : (
         <PracticesList practices={loadedPractices} />
       )}
-      <Link className={styles.linkPractices} to="/addNewGoodPractice">
-        Add new good practice
-      </Link>
+      <div className={styles.actions}>
+        <Link className={styles.linkPractices} to="/addNewGoodPractice">
+          Add new good practice
+        </Link>
+        <Button
+          type="button"
+          onClick={scrollToTopHandler}
+          className={styles.scrollButton}
+        />
+      </div>
     </>
   );
 };

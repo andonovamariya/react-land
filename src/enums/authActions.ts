@@ -3,5 +3,6 @@ enum AuthActions {
   AUTH_SUCCESS = "success",
   LOGOUT = "logout",
   AUTH_ERROR = "authError",
+  CLEAR_ERROR = "clearError",
 }
 export default AuthActions;

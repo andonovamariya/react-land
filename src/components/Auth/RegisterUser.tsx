@@ -1,11 +1,13 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import {
   authenticateUser,
   useAuthDispatch,
   useAuthState,
 } from "../../auth-context";
+import AuthActions from "../../enums/authActions";
 import AuthMethod from "../../enums/authMethod";
+import { isErrorObjectEmpty } from "../../helpers";
 import Button from "../UI/Button";
 
 import styles from "./auth.module.css";
@@ -29,9 +31,11 @@ const Register: React.FC = () => {
 
   const submitRegisterHandler = async (event: FormEvent) => {
     event.preventDefault();
+
     if (inputRefEmail.current && inputRefPassword.current) {
       const enteredEmail: string = inputRefEmail.current.value;
       const enteredPassword: string = inputRefPassword.current.value;
+
       await authenticateUser(dispatch, {
         enteredEmail,
         enteredPassword,
@@ -39,10 +43,16 @@ const Register: React.FC = () => {
       });
     }
 
-    if (!currentUserData.errorMessage) {
-      navigate("/home");
-    }
+    // if (isErrorObjectEmpty(errorObject)) {
+    //   navigate("/home", { replace: true });
+    // }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: AuthActions.AUTH_ERROR });
+    };
+  }, [dispatch]);
 
   return (
     <form onSubmit={submitRegisterHandler} onFocus={beginEnteringHandler}>
@@ -73,16 +83,12 @@ const Register: React.FC = () => {
         {currentUserData.isLoading && (
           <p>Sending a register request to the server...</p>
         )}
-        {currentUserData.errorMessage?.authErrorMessage && !isEntering && (
-          <p className={styles.errorText}>
-            {currentUserData.errorMessage.authErrorMessage}
-          </p>
+        {/* {errorObject && errorObject.authErrorMessage && !isEntering && (
+          <p className={styles.errorText}>{errorObject.authErrorMessage}</p>
         )}
-        {currentUserData.errorMessage?.serverErrorMessage && !isEntering && (
-          <p className={styles.errorText}>
-            {currentUserData.errorMessage.serverErrorMessage}
-          </p>
-        )}
+        {errorObject && errorObject.serverErrorMessage && !isEntering && (
+          <p className={styles.errorText}>{errorObject.serverErrorMessage}</p>
+        )} */}
       </div>
     </form>
   );
