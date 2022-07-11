@@ -13,7 +13,7 @@ import { getErrorMessage } from "../helpers";
 export const authenticateUser: (
   dispatch: React.Dispatch<Action>,
   payload: AuthenticatePayload
-) => Promise<any> = async (dispatch, payload) => {
+) => Promise<void> = async (dispatch, payload) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
   console.log(payload);
@@ -44,13 +44,12 @@ export const authenticateUser: (
 
       dispatch({ type: AuthActions.AUTH_SUCCESS, payload: responseData });
       localStorage.setItem("currentUser", JSON.stringify(responseData));
-      return responseData;
     } else {
       const responseData = await response.json();
 
       let errorMessage: string = "Authentication failed";
       console.log(responseData, "responseData");
-      if (responseData && responseData.error.message) {
+      if (responseData?.error?.message) {
         errorMessage = responseData.error.message;
       }
       console.log(errorMessage, "errorObject from authActions");

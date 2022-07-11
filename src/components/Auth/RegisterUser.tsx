@@ -25,9 +25,9 @@ const Register: React.FC = () => {
     setIsEntering(false);
   };
 
-  const authError: string | undefined =
+  let authError: string | undefined =
     currentUserData.errorObject && currentUserData.errorObject.authErrorMessage;
-  const serverError: string | undefined =
+  let serverError: string | undefined =
     currentUserData.errorObject &&
     currentUserData.errorObject.serverErrorMessage;
 
@@ -47,11 +47,11 @@ const Register: React.FC = () => {
         authenticationMethod: AuthMethod.REGISTER,
       });
     }
-
-    if (isStringEmpty(authError) && isStringEmpty(serverError)) {
-      navigate("/home", { replace: true });
-    }
   };
+
+  if (isStringEmpty(authError) && isStringEmpty(serverError)) {
+    navigate("/home", { replace: true });
+  }
 
   const errorContent = authError ? (
     <p className={styles.errorAuth}>{authError}</p>

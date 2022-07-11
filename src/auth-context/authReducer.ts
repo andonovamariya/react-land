@@ -12,7 +12,6 @@ export const initialState: State = {
   userEmail: currentUserEmail,
   userToken: currentUserToken,
   isLoading: false,
-  errorObject: { authErrorMessage: "", serverErrorMessage: "" },
 };
 
 export interface State {
