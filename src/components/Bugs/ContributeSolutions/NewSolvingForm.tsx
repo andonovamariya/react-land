@@ -2,6 +2,7 @@ import { FormEvent, useRef } from "react";
 import { useAuthState } from "../../../auth-context";
 import Button from "../../UI/Button";
 import Card from "../../UI/Card";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 import styles from "./NewSolvingForm.module.css";
 
@@ -16,6 +17,7 @@ export interface InputtedSolutionData {
 interface NewSolvingFormProps {
   onAddSolution: (solutionData: InputtedSolutionData) => void;
   bugId: string;
+  isLoading: boolean;
 }
 
 const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
@@ -47,26 +49,34 @@ const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
   };
 
   return (
-    <Card>
-      <form className={styles.addSolutionForm} onSubmit={submitFormHandler}>
-        <div className={styles.control}>
-          <label htmlFor="title">Title</label>
-          <input type="title" id="title" ref={solutionTitleInputRef} required />
-        </div>
-        <div className={styles.control}>
-          <label htmlFor="description">Add description</label>
-          <textarea
-            required
-            id="description"
-            rows={10}
-            ref={solutionDescriptionInputRef}
-          />
-        </div>
-        <div className={styles.actions}>
-          <Button type="submit">Add solution</Button>
-        </div>
-      </form>
-    </Card>
+    <>
+      {props.isLoading && <LoadingSpinner />}
+      <Card>
+        <form className={styles.addSolutionForm} onSubmit={submitFormHandler}>
+          <div className={styles.control}>
+            <label htmlFor="title">Title</label>
+            <input
+              type="title"
+              id="title"
+              ref={solutionTitleInputRef}
+              required
+            />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="description">Add description</label>
+            <textarea
+              required
+              id="description"
+              rows={10}
+              ref={solutionDescriptionInputRef}
+            />
+          </div>
+          <div className={styles.actions}>
+            <Button type="submit">Add solution</Button>
+          </div>
+        </form>
+      </Card>
+    </>
   );
 };
 export default NewSolvingForm;

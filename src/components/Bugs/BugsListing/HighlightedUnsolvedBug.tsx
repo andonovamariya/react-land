@@ -15,10 +15,15 @@ const HighlightedUnsolvedBug: React.FC<HighLightedSolvedBugProps> = (props) => {
     <Card>
       <div className={styles.singleBug}>
         <h2>Bug: {props.title}</h2>
-        <h2>Originally uploaded by: {props.authorEmail}</h2>
+        <h3>Originally uploaded by: {props.authorEmail}</h3>
         <p>Description: {props.description}</p>
       </div>
-      <Link to={`/unSolvedBugs/${props.bugId}/allSolutions`}>Solutions</Link>
+      <Link
+        to={`/unSolvedBugs/${props.bugId}/allSolutions`}
+        className={styles.link}
+      >
+        Solutions
+      </Link>
     </Card>
   );
 };

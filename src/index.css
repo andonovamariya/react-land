@@ -3,6 +3,9 @@
   src: local("PoppinsRegular"),
     url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
 }
+* {
+  box-sizing: border-box;
+}
 
 ul {
   list-style-type: none;
@@ -18,10 +21,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 html {

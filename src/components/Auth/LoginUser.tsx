@@ -24,37 +24,35 @@ const LoginUser: React.FC = () => {
     setIsEntering(false);
   };
 
-  const authError: string | undefined =
-    currentUserData.errorObject && currentUserData.errorObject.authErrorMessage;
-  const serverError: string | undefined =
-    currentUserData.errorObject &&
-    currentUserData.errorObject.serverErrorMessage;
-
   const inputRefEmail = useRef<HTMLInputElement>(null);
   const inputRefPassword = useRef<HTMLInputElement>(null);
 
   const submitLoginHandler = async (event: FormEvent) => {
     event.preventDefault();
+    let isLoginSuccessful: boolean = false;
 
     if (inputRefEmail.current && inputRefPassword.current) {
       const enteredEmail: string = inputRefEmail.current.value;
       const enteredPassword: string = inputRefPassword.current.value;
 
-      await authenticateUser(dispatch, {
+      isLoginSuccessful = await authenticateUser(dispatch, {
         enteredEmail,
         enteredPassword,
         authenticationMethod: AuthMethod.LOGIN,
       });
     }
-
-    if (isStringEmpty(authError) && isStringEmpty(serverError)) {
+    if (isLoginSuccessful) {
       navigate("/home", { replace: true });
     }
   };
-  const errorContent = authError ? (
-    <p className={styles.errorAuth}>{authError}</p>
-  ) : (
-    <p className={styles.errorAuth}>{serverError}</p>
+
+  const authError: string | undefined =
+    currentUserData?.errorObject?.authErrorMessage;
+  const serverError: string | undefined =
+    currentUserData?.errorObject?.serverErrorMessage;
+
+  const errorContent = (
+    <p className={styles.errorAuth}>{authError || serverError}</p>
   );
 
   return (
@@ -88,7 +86,7 @@ const LoginUser: React.FC = () => {
             Sending a login request to the server...
           </p>
         )}
-        {!isEntering && authError ? errorContent : null}
+        {!isEntering && currentUserData.errorObject ? errorContent : null}
       </div>
     </form>
   );

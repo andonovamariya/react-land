@@ -6,7 +6,6 @@ import {
   useAuthState,
 } from "../../auth-context";
 import AuthMethod from "../../enums/authMethod";
-import { isStringEmpty } from "../../helpers";
 import Button from "../UI/Button";
 
 import styles from "./auth.module.css";
@@ -25,38 +24,35 @@ const Register: React.FC = () => {
     setIsEntering(false);
   };
 
-  let authError: string | undefined =
-    currentUserData.errorObject && currentUserData.errorObject.authErrorMessage;
-  let serverError: string | undefined =
-    currentUserData.errorObject &&
-    currentUserData.errorObject.serverErrorMessage;
-
   const inputRefEmail = useRef<HTMLInputElement>(null);
   const inputRefPassword = useRef<HTMLInputElement>(null);
 
   const submitRegisterHandler = async (event: FormEvent) => {
     event.preventDefault();
+    let isRegisterSuccessful: boolean = false;
 
     if (inputRefEmail.current && inputRefPassword.current) {
       const enteredEmail: string = inputRefEmail.current.value;
       const enteredPassword: string = inputRefPassword.current.value;
 
-      await authenticateUser(dispatch, {
+      isRegisterSuccessful = await authenticateUser(dispatch, {
         enteredEmail,
         enteredPassword,
         authenticationMethod: AuthMethod.REGISTER,
       });
     }
+    if (isRegisterSuccessful) {
+      navigate("/home", { replace: true });
+    }
   };
+  
+  const authError: string | undefined =
+    currentUserData?.errorObject?.authErrorMessage;
+  const serverError: string | undefined =
+    currentUserData?.errorObject?.serverErrorMessage;
 
-  if (isStringEmpty(authError) && isStringEmpty(serverError)) {
-    navigate("/home", { replace: true });
-  }
-
-  const errorContent = authError ? (
-    <p className={styles.errorAuth}>{authError}</p>
-  ) : (
-    <p className={styles.errorAuth}>{serverError}</p>
+  const errorContent = (
+    <p className={styles.errorAuth}>{authError || serverError}</p>
   );
 
   return (
@@ -90,7 +86,7 @@ const Register: React.FC = () => {
             Sending a register request to the server...
           </p>
         )}
-        {!isEntering && authError ? errorContent : null}
+        {!isEntering && currentUserData.errorObject ? errorContent : null}
       </div>
     </form>
   );

@@ -31,7 +31,6 @@ const GoodPractices: React.FC = () => {
     );
   }
 
-
   return (
     <>
       {errorMessage && (

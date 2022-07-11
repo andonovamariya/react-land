@@ -24,7 +24,7 @@ export interface State {
   };
 }
 
-export const AuthReducer = (initialState: State, action: Action): State => {
+export const AuthReducer = (_: State, action: Action): State => {
   switch (action.type) {
     case AuthActions.REQUEST_AUTH:
       return {
@@ -51,12 +51,6 @@ export const AuthReducer = (initialState: State, action: Action): State => {
         isLoading: false,
         errorObject: action.payload?.errorObject,
       };
-    case AuthActions.CLEAR_ERROR:
-      return {
-        ...initialState,
-        isLoading: false,
-      };
-
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

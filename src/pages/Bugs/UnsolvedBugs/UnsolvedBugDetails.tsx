@@ -40,7 +40,7 @@ const UnsolvedBugDetails = () => {
       )}
       {!loadedBug.solution && status === HttpStatuses.COMPLETED ? (
         <p className={styles.warningTextPractices}>
-          No solution was found for that particular practice!
+          No solution was found for that particular bug!
         </p>
       ) : (
         <HighlightedUnsolvedBug

@@ -4,16 +4,10 @@ import AuthActions from "../enums/authActions";
 import { Action, AuthenticatePayload } from "../models/Auth";
 import { getErrorMessage } from "../helpers";
 
-// export const clearError: (
-//   dispatch: React.Dispatch<Action>
-// ) => Promise<any> = async (dispatch) => {
-//   dispatch({ type: AuthActions.CLEAR_ERROR });
-// };
-
 export const authenticateUser: (
   dispatch: React.Dispatch<Action>,
   payload: AuthenticatePayload
-) => Promise<void> = async (dispatch, payload) => {
+) => Promise<boolean> = async (dispatch, payload) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
   console.log(payload);
@@ -44,15 +38,14 @@ export const authenticateUser: (
 
       dispatch({ type: AuthActions.AUTH_SUCCESS, payload: responseData });
       localStorage.setItem("currentUser", JSON.stringify(responseData));
+      return true;
     } else {
       const responseData = await response.json();
 
       let errorMessage: string = "Authentication failed";
-      console.log(responseData, "responseData");
       if (responseData?.error?.message) {
         errorMessage = responseData.error.message;
       }
-      console.log(errorMessage, "errorObject from authActions");
 
       dispatch({
         type: AuthActions.AUTH_ERROR,
@@ -63,6 +56,7 @@ export const authenticateUser: (
           },
         },
       });
+      return false;
     }
   } catch (error) {
     const availableServerError: string | undefined = getErrorMessage(error);
@@ -90,6 +84,7 @@ export const authenticateUser: (
       });
     }
   }
+  return false;
 };
 
 export const logoutUser = (dispatch: React.Dispatch<Action>): void => {

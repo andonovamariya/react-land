@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import SolutionsList from "../../../components/Bugs/Solutions/SolutionsList";
+import Button from "../../../components/UI/Button";
 import Card from "../../../components/UI/Card";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../../enums/httpStatuses";
@@ -11,6 +12,7 @@ import { getAllSolutionsForABug } from "../../../services/api-solutions";
 import styles from "./index.module.css";
 
 const ShowSolutions: React.FC = () => {
+  const navigate = useNavigate();
   type SolvedBugDetailsParams = {
     bugId: string;
   };
@@ -46,6 +48,13 @@ const ShowSolutions: React.FC = () => {
       ) : (
         <SolutionsList solutions={loadedSolutions} />
       )}
+      <Button
+        type="button"
+        className={styles.goBackButton}
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </Button>
     </>
   );
 };

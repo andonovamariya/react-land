@@ -7,8 +7,6 @@ import HttpStatuses from "../../../enums/httpStatuses";
 import useHttp from "../../../hooks/useHttp";
 import { addSolutionToPractice } from "../../../services/api-solutions";
 
-import styles from "./index.module.css";
-
 const AddSolution = () => {
   const { sendRequest, status } = useHttp(addSolutionToPractice, true);
   const navigate = useNavigate();
@@ -26,13 +24,11 @@ const AddSolution = () => {
   }, [status, navigate, bugId]);
 
   return (
-    <div className={styles.solutions}>
-      <h2>Add solution:</h2>
-      <NewSolvingForm
-        onAddSolution={addSolutionHandler}
-        bugId={bugIdFromParams}
-      />
-    </div>
+    <NewSolvingForm
+      onAddSolution={addSolutionHandler}
+      bugId={bugIdFromParams}
+      isLoading={status === HttpStatuses.COMPLETED}
+    />
   );
 };
 
