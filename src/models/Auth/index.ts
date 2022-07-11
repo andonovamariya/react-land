@@ -7,18 +7,16 @@ export interface AuthenticatePayload {
   authenticationMethod: AuthMethod;
 }
 
-export interface AuthenticationError {
-  authErrorMessage?: string;
-  serverErrorMessage?: string;
-}
-
 export interface Action {
   type: AuthActions;
   payload?: Payload;
-  error?: AuthenticationError;
 }
 
 interface Payload {
-  email: string;
-  idToken: string;
+  email?: string;
+  idToken?: string; 
+  errorObject?: {
+    authErrorMessage: string;
+    serverErrorMessage: string;
+  };
 }

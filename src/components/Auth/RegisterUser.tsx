@@ -1,13 +1,12 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import {
   authenticateUser,
   useAuthDispatch,
   useAuthState,
 } from "../../auth-context";
-import AuthActions from "../../enums/authActions";
 import AuthMethod from "../../enums/authMethod";
-import { isErrorObjectEmpty } from "../../helpers";
+import { isStringEmpty } from "../../helpers";
 import Button from "../UI/Button";
 
 import styles from "./auth.module.css";
@@ -26,6 +25,12 @@ const Register: React.FC = () => {
     setIsEntering(false);
   };
 
+  const authError: string | undefined =
+    currentUserData.errorObject && currentUserData.errorObject.authErrorMessage;
+  const serverError: string | undefined =
+    currentUserData.errorObject &&
+    currentUserData.errorObject.serverErrorMessage;
+
   const inputRefEmail = useRef<HTMLInputElement>(null);
   const inputRefPassword = useRef<HTMLInputElement>(null);
 
@@ -43,16 +48,16 @@ const Register: React.FC = () => {
       });
     }
 
-    // if (isErrorObjectEmpty(errorObject)) {
-    //   navigate("/home", { replace: true });
-    // }
+    if (isStringEmpty(authError) && isStringEmpty(serverError)) {
+      navigate("/home", { replace: true });
+    }
   };
 
-  useEffect(() => {
-    return () => {
-      dispatch({ type: AuthActions.AUTH_ERROR });
-    };
-  }, [dispatch]);
+  const errorContent = authError ? (
+    <p className={styles.errorAuth}>{authError}</p>
+  ) : (
+    <p className={styles.errorAuth}>{serverError}</p>
+  );
 
   return (
     <form onSubmit={submitRegisterHandler} onFocus={beginEnteringHandler}>
@@ -81,14 +86,11 @@ const Register: React.FC = () => {
           </Button>
         )}
         {currentUserData.isLoading && (
-          <p>Sending a register request to the server...</p>
+          <p className={styles.warningAuth}>
+            Sending a register request to the server...
+          </p>
         )}
-        {/* {errorObject && errorObject.authErrorMessage && !isEntering && (
-          <p className={styles.errorText}>{errorObject.authErrorMessage}</p>
-        )}
-        {errorObject && errorObject.serverErrorMessage && !isEntering && (
-          <p className={styles.errorText}>{errorObject.serverErrorMessage}</p>
-        )} */}
+        {!isEntering && authError ? errorContent : null}
       </div>
     </form>
   );

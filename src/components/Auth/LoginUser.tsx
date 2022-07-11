@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   useAuthState,
@@ -6,8 +6,8 @@ import {
   authenticateUser,
 } from "../../auth-context";
 import AuthMethod from "../../enums/authMethod";
+import { isStringEmpty } from "../../helpers";
 import Button from "../UI/Button";
-import AuthActions from "../../enums/authActions";
 
 import styles from "./auth.module.css";
 
@@ -15,10 +15,7 @@ const LoginUser: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
   const currentUserData = useAuthState();
-
   const [isEntering, setIsEntering] = useState<boolean>(false);
-
-  const { errorObject } = currentUserData;
 
   const beginEnteringHandler = () => {
     setIsEntering(true);
@@ -26,6 +23,12 @@ const LoginUser: React.FC = () => {
   const finishEnteringHandler = () => {
     setIsEntering(false);
   };
+
+  const authError: string | undefined =
+    currentUserData.errorObject && currentUserData.errorObject.authErrorMessage;
+  const serverError: string | undefined =
+    currentUserData.errorObject &&
+    currentUserData.errorObject.serverErrorMessage;
 
   const inputRefEmail = useRef<HTMLInputElement>(null);
   const inputRefPassword = useRef<HTMLInputElement>(null);
@@ -43,20 +46,16 @@ const LoginUser: React.FC = () => {
         authenticationMethod: AuthMethod.LOGIN,
       });
     }
-    if (
-      errorObject?.authErrorMessage === "" &&
-      errorObject?.serverErrorMessage === ""
-    ) {
+
+    if (isStringEmpty(authError) && isStringEmpty(serverError)) {
       navigate("/home", { replace: true });
     }
   };
-
-  // cleaning up errors/ error state
-  useEffect(() => {
-    return () => {
-      dispatch({ type: AuthActions.AUTH_ERROR });
-    };
-  }, [dispatch]);
+  const errorContent = authError ? (
+    <p className={styles.errorAuth}>{authError}</p>
+  ) : (
+    <p className={styles.errorAuth}>{serverError}</p>
+  );
 
   return (
     <form onSubmit={submitLoginHandler} onFocus={beginEnteringHandler}>
@@ -85,16 +84,11 @@ const LoginUser: React.FC = () => {
           </Button>
         )}
         {currentUserData.isLoading && (
-          <p>Sending a login request to the server...</p>
+          <p className={styles.warningAuth}>
+            Sending a login request to the server...
+          </p>
         )}
-        {errorObject && errorObject.authErrorMessage !== "" && !isEntering && (
-          <p className={styles.errorText}>{errorObject.authErrorMessage}</p>
-        )}
-        {errorObject &&
-          errorObject.serverErrorMessage !== "" &&
-          !isEntering && (
-            <p className={styles.errorText}>{errorObject.serverErrorMessage}</p>
-          )}
+        {!isEntering && authError ? errorContent : null}
       </div>
     </form>
   );

@@ -4,6 +4,12 @@ import AuthActions from "../enums/authActions";
 import { Action, AuthenticatePayload } from "../models/Auth";
 import { getErrorMessage } from "../helpers";
 
+// export const clearError: (
+//   dispatch: React.Dispatch<Action>
+// ) => Promise<any> = async (dispatch) => {
+//   dispatch({ type: AuthActions.CLEAR_ERROR });
+// };
+
 export const authenticateUser: (
   dispatch: React.Dispatch<Action>,
   payload: AuthenticatePayload
@@ -43,38 +49,46 @@ export const authenticateUser: (
       const responseData = await response.json();
 
       let errorMessage: string = "Authentication failed";
-      let errorObject = { authErrorMessage: "", serverErrorMessage: "" };
-      if (responseData && responseData.error.length !== 0) {
-        errorObject.authErrorMessage = responseData.error.message;
-      } else {
-        errorObject.authErrorMessage = errorMessage;
+      console.log(responseData, "responseData");
+      if (responseData && responseData.error.message) {
+        errorMessage = responseData.error.message;
       }
+      console.log(errorMessage, "errorObject from authActions");
 
-      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
-      return errorObject;
+      dispatch({
+        type: AuthActions.AUTH_ERROR,
+        payload: {
+          errorObject: {
+            authErrorMessage: errorMessage,
+            serverErrorMessage: "",
+          },
+        },
+      });
     }
   } catch (error) {
     const availableServerError: string | undefined = getErrorMessage(error);
     if (availableServerError) {
-      let errorObject = {
-        authErrorMessage: "",
-        serverErrorMessage: availableServerError,
-      };
-
-      dispatch({ type: AuthActions.AUTH_ERROR, error: errorObject });
-      return errorObject;
+      dispatch({
+        type: AuthActions.AUTH_ERROR,
+        payload: {
+          errorObject: {
+            authErrorMessage: "",
+            serverErrorMessage: availableServerError,
+          },
+        },
+      });
     } else {
       const defaultServerError: string =
         "Something went wrong with fetching the data from the server.";
-      let errorObject = {
-        authErrorMessage: "",
-        serverErrorMessage: defaultServerError,
-      };
       dispatch({
         type: AuthActions.AUTH_ERROR,
-        error: errorObject
+        payload: {
+          errorObject: {
+            authErrorMessage: "",
+            serverErrorMessage: defaultServerError,
+          },
+        },
       });
-      return errorObject;
     }
   }
 };

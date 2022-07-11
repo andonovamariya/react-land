@@ -1,5 +1,4 @@
 import HttpStatuses from "../enums/httpStatuses";
-import { AuthenticationError } from "../models/Auth";
 
 export const getErrorMessage = (error: unknown): string | undefined => {
   if (error instanceof Error) {
@@ -9,7 +8,12 @@ export const getErrorMessage = (error: unknown): string | undefined => {
 };
 
 export const isErrorObjectEmpty = (
-  errorObject: AuthenticationError | undefined
+  errorObject:
+    | {
+        authErrorMessage: string;
+        serverErrorMessage: string;
+      }
+    | undefined
 ): boolean =>
   errorObject?.authErrorMessage === "" &&
   errorObject?.serverErrorMessage === "";
@@ -23,3 +27,6 @@ export const isDatabaseEmpty = (
 export const scrollToTopHandler = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
+
+export const isStringEmpty = (str: string | undefined): boolean =>
+  typeof str === "string" && str.length === 0;
