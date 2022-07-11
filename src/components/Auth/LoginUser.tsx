@@ -6,7 +6,6 @@ import {
   authenticateUser,
 } from "../../auth-context";
 import AuthMethod from "../../enums/authMethod";
-import { isStringEmpty } from "../../helpers";
 import Button from "../UI/Button";
 
 import styles from "./auth.module.css";

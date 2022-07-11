@@ -26,3 +26,8 @@ h3 {
   text-indent: 5%;
   font-size: 2.2rem;
 }
+
+.approveSolutionAction {
+  display: flex;
+  justify-content: flex-end;
+}

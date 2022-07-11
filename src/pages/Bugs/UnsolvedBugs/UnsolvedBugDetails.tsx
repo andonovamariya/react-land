@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import HighlightedUnsolvedBug from "../../../components/Bugs/BugsListing/HighlightedUnsolvedBug";
+import Button from "../../../components/UI/Button";
 import Card from "../../../components/UI/Card";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../../enums/httpStatuses";
@@ -9,6 +10,7 @@ import { getOneBug } from "../../../services/api-bugs";
 import styles from "./UnsolvedBugDetails.module.css";
 
 const UnsolvedBugDetails = () => {
+  const navigate = useNavigate();
   type SolvedBugDetailsParams = {
     bugId: string;
   };
@@ -51,6 +53,13 @@ const UnsolvedBugDetails = () => {
         />
       )}
       <div className={styles.actions}>
+        <Button
+          type="button"
+          className={styles.goBackButton}
+          onClick={() => navigate(-1)}
+        >
+          Go back
+        </Button>
         <Link className={styles.link} to={`/unsolvedBugs/${bugId}/contribute`}>
           Add a solution
         </Link>

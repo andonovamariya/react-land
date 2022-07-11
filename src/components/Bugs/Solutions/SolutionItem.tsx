@@ -1,3 +1,4 @@
+import Button from "../../UI/Button";
 import styles from "./SolutionItem.module.css";
 
 interface SolutionItemProps {
@@ -7,11 +8,14 @@ interface SolutionItemProps {
 }
 
 const SolutionItem: React.FC<SolutionItemProps> = (props) => (
-  <li className={styles.solutionItem}>
+  <ul className={styles.solutionItem}>
     <h3>Title: {props.title}</h3>
     <p>Description: {props.description}</p>
     <p>Fixer: {props.fixerEmail}</p>
-  </li>
+    <li className={styles.approveSolutionAction}>
+      <Button type="submit">Approve solution</Button>
+    </li>
+  </ul>
 );
 
 export default SolutionItem;

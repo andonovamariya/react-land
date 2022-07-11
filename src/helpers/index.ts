@@ -27,6 +27,3 @@ export const isDatabaseEmpty = (
 export const scrollToTopHandler = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
-
-export const isStringEmpty = (str: string | undefined): boolean =>
-  typeof str === "string" && str.length === 0;
