@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { useAuthState } from "../../auth-context";
 import { deletePractice } from "../../services/api-good-practices";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
@@ -13,6 +15,7 @@ interface HighlightedPracticeProps {
 }
 
 const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
+  const currentUserData = useAuthState();
   const navigate = useNavigate();
   const [isModalShown, setIsModalShown] = useState<boolean>(false);
 
@@ -33,21 +36,28 @@ const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
       >
         Go back
       </Button>
+      {currentUserData.userEmail === props.author && (
+        <>
+          <Link className={styles.linkEdit} to="/editGoodPractice">
+            Edit practice
+          </Link>
 
-      <Button
-        type="button"
-        className={styles.deleteButton}
-        onClick={() => setIsModalShown(true)}
-      >
-        Delete practice
-      </Button>
+          <Button
+            type="button"
+            className={styles.deleteButton}
+            onClick={() => setIsModalShown(true)}
+          >
+            Delete practice
+          </Button>
 
-      <Modal
-        show={isModalShown}
-        onClose={() => setIsModalShown(false)}
-        onConfirm={deletePracticeHandler}
-        title="Delete practice"
-      />
+          <Modal
+            show={isModalShown}
+            onClose={() => setIsModalShown(false)}
+            onConfirm={deletePracticeHandler}
+            title="Delete practice"
+          />
+        </>
+      )}
     </div>
   );
 };

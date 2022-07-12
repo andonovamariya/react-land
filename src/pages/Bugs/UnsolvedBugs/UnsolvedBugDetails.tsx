@@ -40,23 +40,22 @@ const UnsolvedBugDetails = () => {
       {errorMessage && (
         <p className={styles.errorTextPractices}>{errorMessage}</p>
       )}
-      {!loadedBug.solution && status === HttpStatuses.COMPLETED ? (
+      {!loadedBug.solution && status === HttpStatuses.COMPLETED && (
         <p className={styles.warningTextPractices}>
           No solution was found for that particular bug!
         </p>
-      ) : (
-        <HighlightedUnsolvedBug
-          bugId={loadedBug.id}
-          title={loadedBug.title}
-          description={loadedBug.description}
-          authorEmail={loadedBug.authorEmail}
-        />
       )}
+      <HighlightedUnsolvedBug
+        bugId={loadedBug.id}
+        title={loadedBug.title}
+        description={loadedBug.description}
+        authorEmail={loadedBug.authorEmail}
+      />
       <div className={styles.actions}>
         <Button
           type="button"
           className={styles.goBackButton}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/bugs`)}
         >
           Go back
         </Button>

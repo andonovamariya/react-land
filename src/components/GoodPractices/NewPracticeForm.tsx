@@ -27,7 +27,11 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
   const submitFormHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    if (titleInputRef.current && descriptionTextareaRef.current && currentUserData.userEmail) {
+    if (
+      titleInputRef.current &&
+      descriptionTextareaRef.current &&
+      currentUserData.userEmail
+    ) {
       const enteredTitle: string = titleInputRef.current.value;
       const enteredDescription: string = descriptionTextareaRef.current.value;
 

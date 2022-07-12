@@ -45,7 +45,7 @@ const Register: React.FC = () => {
       navigate("/home", { replace: true });
     }
   };
-  
+
   const authError: string | undefined =
     currentUserData?.errorObject?.authErrorMessage;
   const serverError: string | undefined =

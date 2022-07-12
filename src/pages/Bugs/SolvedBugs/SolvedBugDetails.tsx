@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import HighLightedSolvedBug from "../../../components/Bugs/BugsListing/HighlightedSolvedBug";
+import Button from "../../../components/UI/Button";
 import Card from "../../../components/UI/Card";
 import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../../enums/httpStatuses";
@@ -10,6 +11,7 @@ import { getOneBug } from "../../../services/api-bugs";
 import styles from "./SolvedBugDetails.module.css";
 
 const SolvedBugDetails = () => {
+  const navigate = useNavigate();
   type SolvedBugDetailsParams = {
     bugId: string;
   };
@@ -48,10 +50,15 @@ const SolvedBugDetails = () => {
           bugId={loadedBug.id}
           title={loadedBug.title}
           description={loadedBug.description}
-          fixerEmail={loadedBug.fixerEmail}
+          isSolved={loadedBug.isSolved}
           authorEmail={loadedBug.authorEmail}
         />
       )}
+      <div className={styles.bugDetailsActions}>
+        <Button type="button" onClick={() => navigate(-1)}>
+          Go back
+        </Button>
+      </div>
     </>
   );
 };

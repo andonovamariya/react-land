@@ -12,6 +12,7 @@ const SolutionsList: React.FC<SolutionsListProps> = (props) => (
     {props.solutions.map((solution) => (
       <SolutionItem
         key={solution.id}
+        bugId={solution.bugId}
         title={solution.title}
         description={solution.description}
         fixerEmail={solution.fixerEmail}

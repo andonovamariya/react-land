@@ -6,7 +6,8 @@ import Layout from "./Layout/Layout";
 
 const AppRoutes = () => {
   const currentUserData = useAuthState();
-  const isUserLogged: boolean = currentUserData && currentUserData.userToken !== "";
+  const isUserLogged: boolean =
+    currentUserData && currentUserData.userToken !== "";
 
   return (
     <Layout>

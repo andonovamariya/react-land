@@ -1,5 +1,4 @@
 import { FormEvent, useRef } from "react";
-import { useNavigate } from "react-router";
 import { useAuthState } from "../../../auth-context";
 import Button from "../../UI/Button";
 import Card from "../../UI/Card";
@@ -22,7 +21,6 @@ interface NewSolvingFormProps {
 }
 
 const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
-  const navigate = useNavigate();
   const { onAddSolution } = props;
 
   const currentUserData = useAuthState();

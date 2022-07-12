@@ -5,10 +5,10 @@ import NewSolvingForm, {
 } from "../../../components/Bugs/ContributeSolutions/NewSolvingForm";
 import HttpStatuses from "../../../enums/httpStatuses";
 import useHttp from "../../../hooks/useHttp";
-import { addSolutionToPractice } from "../../../services/api-solutions";
+import { addSolutionToBug } from "../../../services/api-solutions";
 
 const AddSolution = () => {
-  const { sendRequest, status } = useHttp(addSolutionToPractice, true);
+  const { sendRequest, status } = useHttp(addSolutionToBug, true);
   const navigate = useNavigate();
   const { bugId } = useParams<string>();
   const bugIdFromParams: string = bugId ? bugId : "";
@@ -19,7 +19,7 @@ const AddSolution = () => {
 
   useEffect(() => {
     if (status === HttpStatuses.COMPLETED) {
-      navigate(`/unSolvedBugs/${bugId}`);
+      navigate(`/bugs`);
     }
   }, [status, navigate, bugId]);
 

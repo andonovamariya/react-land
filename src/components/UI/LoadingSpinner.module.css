@@ -13,7 +13,7 @@
   display: inline-block;
   width: 64px;
   height: 64px;
-  border: 7px solid #EDF1FF;
+  border: 7px solid #edf1ff;
   border-radius: 50%;
   border-top-color: #003d80;
   animation: spin 1s ease-in-out infinite;

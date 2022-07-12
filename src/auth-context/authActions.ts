@@ -10,7 +10,6 @@ export const authenticateUser: (
 ) => Promise<boolean> = async (dispatch, payload) => {
   const { enteredEmail, enteredPassword, authenticationMethod } = payload;
 
-  console.log(payload);
   const requestDetails = {
     method: "POST",
     body: JSON.stringify({

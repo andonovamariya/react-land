@@ -93,13 +93,12 @@ export const editPractice: (
   practiceInputData: GoodPractice
 ) => Promise<void> = async (practiceInputData) => {
   const response: Response = await fetch(
-    `${FIREBASE_DOMAIN}/goodPractices.json`,
+    `${FIREBASE_DOMAIN}/goodPractices/${practiceInputData.id}.json`,
     {
-      method: "PATCH",
+      method: "PUT",
       body: JSON.stringify(practiceInputData),
       headers: {
-        authorization: "Bearer AIzaSyDm3qU1JtOeESp3PrzMQQ0L9Mv0lXvnuWc",
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
     }
   );

@@ -7,7 +7,10 @@ interface HighLightedSolvedBugProps {
   title: string;
   description: string;
   authorEmail: string;
-  fixerEmail: string;
+  isSolved: {
+    isSolved: boolean;
+    fixerEmail: string;
+  };
 }
 
 const HighLightedSolvedBug: React.FC<HighLightedSolvedBugProps> = (props) => {
@@ -15,8 +18,8 @@ const HighLightedSolvedBug: React.FC<HighLightedSolvedBugProps> = (props) => {
     <Card>
       <div className={styles.singleBug}>
         <h2>Bug: {props.title}</h2>
-        <h2>Originally uploaded by: {props.authorEmail}</h2>
-        <h2>Solved by: {props.fixerEmail}</h2>
+        <h3>Originally uploaded by: {props.authorEmail}</h3>
+        <h3>Solved by: {props.isSolved.fixerEmail}</h3>
         <p>Description: {props.description}</p>
       </div>
     </Card>

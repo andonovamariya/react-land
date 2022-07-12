@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Card from "../../UI/Card";
 
 import styles from "./HighlightedBug.module.css";
@@ -18,12 +17,6 @@ const HighlightedUnsolvedBug: React.FC<HighLightedSolvedBugProps> = (props) => {
         <h3>Originally uploaded by: {props.authorEmail}</h3>
         <p>Description: {props.description}</p>
       </div>
-      <Link
-        to={`/unSolvedBugs/${props.bugId}/allSolutions`}
-        className={styles.link}
-      >
-        Solutions
-      </Link>
     </Card>
   );
 };

@@ -14,7 +14,7 @@ export interface Action {
 
 interface Payload {
   email?: string;
-  idToken?: string; 
+  idToken?: string;
   errorObject?: {
     authErrorMessage: string;
     serverErrorMessage: string;

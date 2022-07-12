@@ -8,19 +8,19 @@
 }
 
 .singleBug p {
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   color: #003d80;
 }
 
 .singleBug h2 {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
   color: #003d80;
 }
 
 .singleBug h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
   color: #003d80;
@@ -31,7 +31,7 @@
 }
 
 .link {
-  color: #EDF1FF;
+  color: #edf1ff;
   background-color: #003d80;
   border-radius: 36px;
   padding: 0.5rem 2rem;
