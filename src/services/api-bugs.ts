@@ -18,14 +18,6 @@ export const getAllBugs: () => Promise<Bug[]> = async () => {
     transformedBugsData.push(bugObject);
   }
 
-  // const transformedErrors: CommonError[] = responseCommonErrorsData.reduce(
-  //   (currentValue: CommonError, key: string) => {
-  //     currentValue.id += responseCommonErrorsData[key];
-  //     return currentValue;
-  //   },
-  //   []
-  // );
-
   return transformedBugsData;
 };
 
