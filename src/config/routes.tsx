@@ -56,7 +56,6 @@ const routes: Route[] = [
     element: ShowSolutions,
     isPrivate: true,
   },
-  { path: "/editGoodPractice", element: EditPractice, isPrivate: true },
   { path: "/*", element: NotFound, isPrivate: false },
 ];
 

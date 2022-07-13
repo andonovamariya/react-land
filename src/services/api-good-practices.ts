@@ -93,9 +93,9 @@ export const editPractice: (
   practiceInputData: GoodPractice
 ) => Promise<void> = async (practiceInputData) => {
   const response: Response = await fetch(
-    `${FIREBASE_DOMAIN}/goodPractices/${practiceInputData.id}.json`,
+    `${FIREBASE_DOMAIN}/goodPractices/${practiceInputData.id}/.json`,
     {
-      method: "PUT",
+      method: "PATCH",
       body: JSON.stringify(practiceInputData),
       headers: {
         "Content-Type": "application/json",

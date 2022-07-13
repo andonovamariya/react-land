@@ -7,17 +7,6 @@ export const getErrorMessage = (error: unknown): string | undefined => {
   return;
 };
 
-export const isErrorObjectEmpty = (
-  errorObject:
-    | {
-        authErrorMessage: string;
-        serverErrorMessage: string;
-      }
-    | undefined
-): boolean =>
-  errorObject?.authErrorMessage === "" &&
-  errorObject?.serverErrorMessage === "";
-
 export const isDatabaseEmpty = (
   loadedData: string,
   status: HttpStatuses

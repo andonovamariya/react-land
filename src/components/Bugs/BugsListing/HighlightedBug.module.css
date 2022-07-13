@@ -8,26 +8,26 @@
 }
 
 .singleBug p {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   color: #003d80;
 }
 
 .singleBug h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   color: #003d80;
 }
 
 .singleBug h3 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
   color: #003d80;
 }
 
 .goBackButton {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 }
 
 .link {
@@ -38,7 +38,7 @@
   padding-bottom: 0.5rem;
   margin: 20px;
   text-decoration: none;
-  font-size: 1.9rem;
+  font-size: 1.3rem;
 }
 
 .link:visited {

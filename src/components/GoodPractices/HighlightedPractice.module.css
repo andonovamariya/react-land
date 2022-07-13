@@ -8,12 +8,12 @@
 }
 
 .singlePractice p {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #003d80;
 }
 
 .singlePractice h3 {
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   text-align: center;
   color: #003d80;
 }
@@ -26,7 +26,7 @@
   padding-bottom: 0.5rem;
   margin: 20px;
   text-decoration: none;
-  font-size: 1.9rem;
+  font-size: 1.3rem;
 }
 
 .linkEdit:visited {
@@ -36,7 +36,7 @@
 
 .deleteButton,
 .goBackButton {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 }
 
 .deleteButton {

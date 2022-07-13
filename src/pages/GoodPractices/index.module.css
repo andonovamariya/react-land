@@ -26,7 +26,7 @@
   padding-bottom: 0.5rem;
   margin: 20px;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 .linkPractices:visited {
@@ -43,8 +43,8 @@
 
 .scrollButton {
   align-self: flex-end;
-  height: 6rem;
-  width: 6rem;
+  height: 5rem;
+  width: 5rem;
   background: url("../../assets/arrow.png") no-repeat;
   background-size: contain;
   border: none;

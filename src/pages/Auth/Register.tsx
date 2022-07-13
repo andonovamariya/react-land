@@ -5,7 +5,7 @@ import styles from "./auth.module.css";
 
 const Register = () => (
   <div className={styles.authContainer}>
-    <h3>Register</h3>
+    <h1 className={styles.authHeader}>Register</h1>
     <RegisterUser />
     <Link className={styles.authLink} to="/login">
       Sign in

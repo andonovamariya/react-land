@@ -1,6 +1,6 @@
 .bugItemSolved {
   margin: 2rem 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 6px solid #ccccff;
   background-color: #b2d492;
@@ -8,7 +8,7 @@
 
 .bugItemNotSolved {
   margin: 2rem 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 6px solid #ccccff;
   background-color: #ea5b5b;
@@ -22,7 +22,7 @@
   padding-bottom: 0.5rem;
   margin: 20px;
   text-decoration: none;
-  font-size: 1.9rem;
+  font-size: 1.3rem;
 }
 
 .link:visited {
@@ -33,5 +33,5 @@
 h3 {
   color: #003d80;
   text-indent: 5%;
-  font-size: 2.2rem;
+  font-size: 1.6rem;
 }

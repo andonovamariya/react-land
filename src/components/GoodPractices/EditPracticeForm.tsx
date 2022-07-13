@@ -1,26 +1,30 @@
 import { useRef, FormEvent } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useAuthState } from "../../auth-context";
+import GoodPractice from "../../models/goodPractice.model";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 import styles from "./EditPracticeForm.module.css";
 
-export interface InputtedDataPractices {
-  title: string;
-  description: string;
-  author: string;
-}
-
 interface NewPracticeFormProps {
-  onEditPractice: (practiceData: InputtedDataPractices) => void;
+  onEditPractice: (practiceData: GoodPractice) => void;
   isLoading: boolean;
 }
 
+interface LocationStateFromHighlightedPractice {
+  goodPracticeData: GoodPractice;
+}
+
 const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
+  const location = useLocation();
+  const state = location.state as LocationStateFromHighlightedPractice;
+  const { goodPracticeData } = state;
+
   const navigate = useNavigate();
   const currentUserData = useAuthState();
+
   const titleInputRef = useRef<HTMLInputElement>(null);
   const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -36,12 +40,14 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
       const enteredDescription: string = descriptionTextareaRef.current.value;
 
       props.onEditPractice({
+        id: goodPracticeData.id,
         title: enteredTitle,
         description: enteredDescription,
         author: currentUserData.userEmail,
       });
     }
   };
+
   return (
     <>
       {props.isLoading && <LoadingSpinner />}
@@ -49,12 +55,18 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
         <form className={styles.editPracticeForm} onSubmit={submitFormHandler}>
           <div className={styles.control}>
             <label htmlFor="title">Title</label>
-            <input type="title" id="title" ref={titleInputRef} />
+            <input
+              id="title"
+              defaultValue={goodPracticeData.title}
+              type="title"
+              ref={titleInputRef}
+            />
           </div>
           <div className={styles.control}>
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
+              defaultValue={goodPracticeData.description}
               rows={10}
               ref={descriptionTextareaRef}
             ></textarea>

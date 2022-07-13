@@ -38,7 +38,18 @@ const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
       </Button>
       {currentUserData.userEmail === props.author && (
         <>
-          <Link className={styles.linkEdit} to="/editGoodPractice">
+          <Link
+            className={styles.linkEdit}
+            to="/editGoodPractice"
+            state={{
+              goodPracticeData: {
+                id: props.practiceId,
+                title: props.title,
+                description: props.description,
+                author: props.author,
+              },
+            }}
+          >
             Edit practice
           </Link>
 

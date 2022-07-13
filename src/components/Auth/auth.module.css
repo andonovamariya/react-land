@@ -2,6 +2,7 @@
   text-align: center;
   color: #edf1ff;
   font-weight: bold;
+  font-size: 1.36rem;
 }
 
 .control {
@@ -34,7 +35,7 @@
 }
 
 .authButton {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .warningAuth,

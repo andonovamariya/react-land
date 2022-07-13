@@ -5,7 +5,7 @@ import styles from "./auth.module.css";
 
 const Login: React.FC = () => (
   <div className={styles.authContainer}>
-    <h3>Login</h3>
+    <h1 className={styles.authHeader}>Login</h1>
     <LoginUser />
     <Link className={styles.authLink} to="/register">
       Sign up
