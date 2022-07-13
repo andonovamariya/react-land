@@ -7,23 +7,27 @@ import { approveSolution } from "../../../services/api-solutions";
 import Button from "../../UI/Button";
 import styles from "./SolutionItem.module.css";
 
-interface SolutionItemProps {
+interface NotApprovedSolutionItemProps {
+  id: string;
   title: string;
   description: string;
   fixerEmail: string;
   bugId: string;
 }
 
-const SolutionItem: React.FC<SolutionItemProps> = (props) => {
+const NotApprovedSolutionItem: React.FC<NotApprovedSolutionItemProps> = (
+  props
+) => {
   const currentUserData = useAuthState();
   const { sendRequest, status } = useHttp(approveSolution, true);
   const navigate = useNavigate();
 
   const { bugId } = props;
   const { fixerEmail } = props;
+  const { id } = props;
 
   const approveSolutionHandler = () => {
-    sendRequest({ bugId, fixerEmail });
+    sendRequest({ bugId, fixerEmail, id });
   };
 
   useEffect(() => {
@@ -52,4 +56,4 @@ const SolutionItem: React.FC<SolutionItemProps> = (props) => {
   );
 };
 
-export default SolutionItem;
+export default NotApprovedSolutionItem;

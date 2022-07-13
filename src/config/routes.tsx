@@ -1,4 +1,3 @@
-//  contains config for the different routes in our application
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Bugs from "../pages/Bugs";
@@ -47,12 +46,12 @@ const routes: Route[] = [
     isPrivate: true,
   },
   {
-    path: "/solvedBugs/:bugId/allSolutions",
+    path: "/solvedBugs/:bugId/solving",
     element: ShowSolutions,
     isPrivate: true,
   },
   {
-    path: "/unSolvedBugs/:bugId/allSolutions",
+    path: "/unSolvedBugs/:bugId/solving",
     element: ShowSolutions,
     isPrivate: true,
   },

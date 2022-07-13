@@ -53,13 +53,15 @@ export const addSolutionToBug: (
 };
 
 interface ApprovedSolutionData {
+  id: string;
   bugId: string;
   fixerEmail: string;
+  solutionId: string;
 }
 
 export const approveSolution: (
   approvedSolutionData: ApprovedSolutionData
-) => Promise<void> = async ({ bugId, fixerEmail }) => {
+) => Promise<void> = async ({ bugId, fixerEmail, id }) => {
   const approvedSolutionExtraData = { isSolved: true, fixerEmail: fixerEmail };
   const responseUpdateisSolved: Response = await fetch(
     `${FIREBASE_DOMAIN}/bugs/${bugId}/isSolved/.json`,
@@ -76,6 +78,24 @@ export const approveSolution: (
     throw new Error(
       responseData.message ||
         "Could not change the status of the bug to solved."
+    );
+  }
+  const isSuccessfullyApproved = { isApproved: true };
+  const responseApproveSolution: Response = await fetch(
+    `${FIREBASE_DOMAIN}/bugs/${bugId}/solution/${id}/.json`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(isSuccessfullyApproved),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const responseDataApproveSolution = await responseApproveSolution.json();
+  if (!responseDataApproveSolution.ok) {
+    throw new Error(
+      responseDataApproveSolution.message ||
+        "Could not change the status of the solution to be approved."
     );
   }
 };

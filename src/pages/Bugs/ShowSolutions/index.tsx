@@ -35,7 +35,6 @@ const ShowSolutions: React.FC = () => {
       </Card>
     );
   }
-
   return (
     <>
       {errorMessage && (
@@ -46,9 +45,7 @@ const ShowSolutions: React.FC = () => {
           Solutions were NOT found in my database.
         </p>
       ) : (
-        <SolutionsList
-          solutions={loadedSolutions}
-        />
+        <SolutionsList solutions={loadedSolutions} />
       )}
       <Button
         type="button"

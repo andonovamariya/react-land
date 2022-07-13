@@ -25,7 +25,7 @@ const BugItem: React.FC<BugItemProps> = (props) => (
         </Link>
         <Link
           className={styles.link}
-          to={`/solvedBugs/${props.id}/allSolutions`}
+          to={`/solvedBugs/${props.id}/solving`}
         >
           View solving
         </Link>
@@ -37,7 +37,7 @@ const BugItem: React.FC<BugItemProps> = (props) => (
         </Link>
         <Link
           className={styles.link}
-          to={`/unsolvedBugs/${props.id}/allSolutions`}
+          to={`/unsolvedBugs/${props.id}/solving`}
         >
           Suggested solutions
         </Link>
