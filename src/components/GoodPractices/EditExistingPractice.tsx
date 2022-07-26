@@ -6,9 +6,9 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-import styles from "./EditPracticeForm.module.css";
+import styles from "./EditExistingPractice.module.css";
 
-interface NewPracticeFormProps {
+interface EditExistingPracticeProps {
   onEditPractice: (practiceData: GoodPractice) => void;
   isLoading: boolean;
 }
@@ -17,7 +17,7 @@ interface LocationStateFromHighlightedPractice {
   goodPracticeData: GoodPractice;
 }
 
-const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
+const EditExistingPractice: React.FC<EditExistingPracticeProps> = (props) => {
   const location = useLocation();
   const state = location.state as LocationStateFromHighlightedPractice;
   const { goodPracticeData } = state;
@@ -71,10 +71,10 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
               ref={descriptionTextareaRef}
             ></textarea>
           </div>
-          <div className={styles.actions}>
+          <div className="actions">
             <Button type="submit">Edit practice</Button>
           </div>
-          <div className={styles.actions}>
+          <div className="actions">
             <Button type="button" onClick={() => navigate(-1)}>
               Go back
             </Button>
@@ -85,4 +85,4 @@ const NewPracticeForm: React.FC<NewPracticeFormProps> = (props) => {
   );
 };
 
-export default NewPracticeForm;
+export default EditExistingPractice;

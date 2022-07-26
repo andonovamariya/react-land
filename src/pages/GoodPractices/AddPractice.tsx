@@ -3,16 +3,16 @@ import { useNavigate } from "react-router";
 
 import HttpStatuses from "../../enums/httpStatuses";
 import NewPracticeForm, {
-  InputtedDataPractices,
-} from "../../components/GoodPractices/NewPracticeForm";
+  InputDataPractices,
+} from "../../components/GoodPractices/AddNewPractice";
 import useHttp from "../../hooks/useHttp";
 import { addPractice } from "../../services/api-good-practices";
 
-const AddNewPracticePage: React.FC = () => {
+const AddPractice: React.FC = () => {
   const { sendRequest, status } = useHttp(addPractice, true);
   const navigate = useNavigate();
 
-  const addPracticeHandler = (practiceData: InputtedDataPractices) => {
+  const addPracticeHandler = (practiceData: InputDataPractices) => {
     sendRequest(practiceData);
   };
 
@@ -30,4 +30,4 @@ const AddNewPracticePage: React.FC = () => {
   );
 };
 
-export default AddNewPracticePage;
+export default AddPractice;

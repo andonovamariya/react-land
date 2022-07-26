@@ -6,9 +6,9 @@ import BugsList from "../../components/Bugs/BugsListing/BugsList";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { isDatabaseEmpty, scrollToTopHandler } from "../../helpers";
-import styles from "./index.module.css";
 import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
+import styles from "./index.module.css";
 
 const Bugs: React.FC = () => {
   const {
@@ -29,26 +29,28 @@ const Bugs: React.FC = () => {
           <LoadingSpinner />
         </Card>
       )}
-      {errorMessage && <p className={styles.errorStyleBugs}>{errorMessage}</p>}
+      {errorMessage && <p className="errorText">{errorMessage}</p>}
       {isDatabaseEmpty(loadedBugs, status) && (
-        <p className={styles.warningStyleBugs}>
-          Database records of bugs were NOT found.
-        </p>
+        <p className="warningText">Database records of bugs were NOT found.</p>
       )}
-      <div className={styles.actionsListBugs}>
-        <div className={styles.bugImage}>
-          <img src={require("../../assets/greenBug.png")} alt="small bug" />
-        </div>
-        <Link className={styles.linkStyleBugs} to="/addNewBug">
+      <div className="actions">
+        <Card>
+          <img
+            className={styles.bugImage}
+            src={require("../../assets/greenBug.png")}
+            alt="small bug"
+          />
+        </Card>
+        <Link className="link" to="/addNewBug">
           Add a new bug
         </Link>
       </div>
       <BugsList bugs={loadedBugs} />
-      <div className={styles.actionsListBugs}>
+      <div className="actions">
         <Button
           type="button"
           onClick={scrollToTopHandler}
-          className={styles.scrollButton}
+          className="scrollButton"
         />
       </div>
     </>

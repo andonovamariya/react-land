@@ -1,6 +1,6 @@
 .authContainer {
   margin: 3rem auto;
-  width: 95%;
+  width: 100%;
   max-width: 25rem;
   border-radius: 6px;
   background-color: #63a4ff;
@@ -10,30 +10,17 @@
   color: #edf1ff;
 }
 
-.actions .toggle {
-  margin-top: 1rem;
-  background-color: transparent;
-  color: #003d80;
-  border: none;
-  padding: 0.15rem 1.5rem;
-}
-
-.actions .toggle:hover {
-  background-color: transparent;
-  color: #ccccff;
-}
-
 .authLink {
   cursor: pointer;
   font: inherit;
   color: #003d80;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
 
 .authHeader{
   text-align: center;
   color: #edf1ff;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
 }

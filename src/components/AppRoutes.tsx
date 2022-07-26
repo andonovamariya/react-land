@@ -1,4 +1,3 @@
-// used to define protected routes(routes that can only be accessed by authenticated users)
 import { Routes, Route, Navigate } from "react-router-dom";
 import routes from "../config/routes";
 import { useAuthState } from "../auth-context";

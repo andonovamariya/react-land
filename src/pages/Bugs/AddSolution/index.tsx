@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import NewSolvingForm, {
-  InputtedSolutionData,
-} from "../../../components/Bugs/ContributeSolutions/NewSolvingForm";
+import AddNewSolution, {
+  InputSolutionData,
+} from "../../../components/Bugs/ContributeSolutions/AddNewSolution";
 import HttpStatuses from "../../../enums/httpStatuses";
 import useHttp from "../../../hooks/useHttp";
 import { addSolutionToBug } from "../../../services/api-solutions";
@@ -11,9 +11,9 @@ const AddSolution = () => {
   const { sendRequest, status } = useHttp(addSolutionToBug, true);
   const navigate = useNavigate();
   const { bugId } = useParams<string>();
-  const bugIdFromParams: string = bugId ? bugId : "";
+  const bugIdFromParams: string = bugId ?? "";
 
-  const addSolutionHandler = (solutionData: InputtedSolutionData) => {
+  const addSolutionHandler = (solutionData: InputSolutionData) => {
     sendRequest(solutionData);
   };
 
@@ -21,10 +21,10 @@ const AddSolution = () => {
     if (status === HttpStatuses.COMPLETED) {
       navigate(`/bugs`);
     }
-  }, [status, navigate, bugId]);
+  }, [status, navigate]);
 
   return (
-    <NewSolvingForm
+    <AddNewSolution
       onAddSolution={addSolutionHandler}
       bugId={bugIdFromParams}
       isLoading={status === HttpStatuses.COMPLETED}

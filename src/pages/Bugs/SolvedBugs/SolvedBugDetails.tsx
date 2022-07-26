@@ -8,8 +8,6 @@ import HttpStatuses from "../../../enums/httpStatuses";
 import useHttp from "../../../hooks/useHttp";
 import { getOneBug } from "../../../services/api-bugs";
 
-import styles from "./SolvedBugDetails.module.css";
-
 const SolvedBugDetails = () => {
   const navigate = useNavigate();
   type SolvedBugDetailsParams = {
@@ -39,10 +37,10 @@ const SolvedBugDetails = () => {
   return (
     <>
       {errorMessage && (
-        <p className={styles.errorTextPractices}>{errorMessage}</p>
+        <p className="errorText">{errorMessage}</p>
       )}
       {!loadedBug.description && status === HttpStatuses.COMPLETED ? (
-        <p className={styles.warningTextPractices}>
+        <p className="warningText">
           No description found for that particular practice!
         </p>
       ) : (
@@ -54,7 +52,7 @@ const SolvedBugDetails = () => {
           authorEmail={loadedBug.authorEmail}
         />
       )}
-      <div className={styles.bugDetailsActions}>
+      <div className="actions">
         <Button type="button" onClick={() => navigate(-1)}>
           Go back
         </Button>

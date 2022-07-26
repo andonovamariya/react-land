@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  height: 7rem;
+  height: 6.5rem;
   display: flex;
   padding: 0 10%;
   justify-content: space-around;
@@ -10,7 +10,7 @@
 
 .logo {
   justify-content: left;
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: bolder;
   color: #edf1ff;
   text-shadow: 2px 2px 5px #003d80;
@@ -26,7 +26,6 @@
 
 .nav li {
   margin-left: 1rem;
-  font-size: 1.4rem;
 }
 
 .nav a {
@@ -42,18 +41,18 @@
 .nav a.active {
   color: #e6fcfc;
   text-shadow: 2px 2px 5px #003d80;
+  font-size: 1.3rem;
 }
 
 .greeting,
 .navLink {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #edf1ff;
   text-shadow: 2px 2px 4px #003d80;
 }
 
 .authButton {
   justify-content: right;
-  font-size: 1.1rem;
   font-weight: bolder;
   color: #edf1ff;
   text-shadow: 2px 2px 5px #003d80;
@@ -67,7 +66,7 @@
 
 @media screen and (max-width: 1520px) {
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     text-align: center;
   }
 }

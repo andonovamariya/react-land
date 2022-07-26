@@ -1,10 +1,3 @@
-.auth h1 {
-  text-align: center;
-  color: #edf1ff;
-  font-weight: bold;
-  font-size: 1.36rem;
-}
-
 .control {
   margin-bottom: 0.5rem;
 }
@@ -12,7 +5,7 @@
 .control label {
   display: block;
   color: #edf1ff;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -27,32 +20,6 @@
   padding: 0.25rem;
 }
 
-.actions {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .authButton {
-  font-size: 1.25rem;
-}
-
-.warningAuth,
-.errorAuth {
-  border: 1px solid;
-  margin: 10px 0px;
-  padding: 15px 10px 15px 50px;
-  background-repeat: no-repeat;
-  background-position: 10px center;
-}
-.warningAuth {
-  color: #9f6000;
-  background-color: #feefb3;
-  background-image: url("https://i.imgur.com/Z8q7ww7.png");
-}
-.errorAuth {
-  color: #d8000c;
-  background-color: #ffbaba;
-  background-image: url("https://i.imgur.com/GnyDvKN.png");
+  font-size: 1rem;
 }

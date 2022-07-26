@@ -1,3 +1,10 @@
+enum Position {
+  INTERN = "intern",
+  JUNIOR = "junior",
+  MID = "mid",
+  SENIOR = "senior",
+}
+
 interface User {
   id: string;
   firstName: string;
@@ -6,7 +13,7 @@ interface User {
   password: string;
   age: string;
   country: string;
-  position: "intern" | "junior" | "mid" | "senior";
+  position: Position;
 }
 
 export default User;

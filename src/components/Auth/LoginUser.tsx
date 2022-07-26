@@ -51,7 +51,7 @@ const LoginUser: React.FC = () => {
     currentUserData?.errorObject?.serverErrorMessage;
 
   const errorContent = (
-    <p className={styles.errorAuth}>{authError || serverError}</p>
+    <p className="errorText">{authError || serverError}</p>
   );
 
   return (
@@ -70,7 +70,7 @@ const LoginUser: React.FC = () => {
           ref={inputRefPassword}
         />
       </div>
-      <div className={styles.actions}>
+      <div className="actions">
         {!currentUserData.isLoading && (
           <Button
             type="submit"
@@ -81,7 +81,7 @@ const LoginUser: React.FC = () => {
           </Button>
         )}
         {currentUserData.isLoading && (
-          <p className={styles.warningAuth}>
+          <p className="warningText">
             Sending a login request to the server...
           </p>
         )}

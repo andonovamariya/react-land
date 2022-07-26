@@ -1,13 +1,13 @@
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Bugs from "../pages/Bugs";
-import AddNewBug from "../pages/Bugs/AddNewBug";
+import AddBug from "../pages/Bugs/AddBug";
 import AddSolution from "../pages/Bugs/AddSolution";
 import ShowSolutions from "../pages/Bugs/ShowSolutions";
 import SolvedBugDetails from "../pages/Bugs/SolvedBugs/SolvedBugDetails";
 import UnsolvedBugDetails from "../pages/Bugs/UnsolvedBugs/UnsolvedBugDetails";
 import GoodPractices from "../pages/GoodPractices";
-import AddNewPractice from "../pages/GoodPractices/AddNewPractice";
+import AddPractice from "../pages/GoodPractices/AddPractice";
 import EditPractice from "../pages/GoodPractices/EditPractice";
 import PracticeDetail from "../pages/GoodPractices/PracticeDetail";
 import Home from "../pages/Home";
@@ -30,10 +30,10 @@ const routes: Route[] = [
     element: PracticeDetail,
     isPrivate: true,
   },
-  { path: "/addNewGoodPractice", element: AddNewPractice, isPrivate: true },
+  { path: "/addNewGoodPractice", element: AddPractice, isPrivate: true },
   { path: "/editGoodPractice", element: EditPractice, isPrivate: true },
   { path: "/bugs", element: Bugs, isPrivate: true },
-  { path: "/addNewBug", element: AddNewBug, isPrivate: true },
+  { path: "/addNewBug", element: AddBug, isPrivate: true },
   { path: "/solvedBugs/:bugId", element: SolvedBugDetails, isPrivate: true },
   {
     path: "/unSolvedBugs/:bugId",

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import EditPracticeForm from "../../components/GoodPractices/EditPracticeForm";
+import EditExistingPractice from "../../components/GoodPractices/EditExistingPractice";
 import HttpStatuses from "../../enums/httpStatuses";
 import useHttp from "../../hooks/useHttp";
 import GoodPractice from "../../models/goodPractice.model";
@@ -21,7 +21,7 @@ const EditPractice: React.FC = () => {
   }, [status, navigate]);
 
   return (
-    <EditPracticeForm
+    <EditExistingPractice
       isLoading={status === HttpStatuses.COMPLETED}
       onEditPractice={editPracticeHandler}
     />

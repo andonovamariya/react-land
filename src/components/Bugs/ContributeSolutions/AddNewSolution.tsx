@@ -4,9 +4,9 @@ import Button from "../../UI/Button";
 import Card from "../../UI/Card";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
-import styles from "./NewSolvingForm.module.css";
+import styles from "./AddNewSolution.module.css";
 
-export interface InputtedSolutionData {
+export interface InputSolutionData {
   title: string;
   description: string;
   fixerEmail: string;
@@ -14,13 +14,13 @@ export interface InputtedSolutionData {
   bugId: string;
 }
 
-interface NewSolvingFormProps {
-  onAddSolution: (solutionData: InputtedSolutionData) => void;
+interface AddNewSolutionProps {
+  onAddSolution: (solutionData: InputSolutionData) => void;
   bugId: string;
   isLoading: boolean;
 }
 
-const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
+const AddNewSolution: React.FC<AddNewSolutionProps> = (props) => {
   const { onAddSolution } = props;
 
   const currentUserData = useAuthState();
@@ -71,7 +71,7 @@ const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
               ref={solutionDescriptionInputRef}
             />
           </div>
-          <div className={styles.actions}>
+          <div className="actions">
             <Button type="submit">Add solution</Button>
           </div>
         </form>
@@ -79,4 +79,4 @@ const NewSolvingForm: React.FC<NewSolvingFormProps> = (props) => {
     </>
   );
 };
-export default NewSolvingForm;
+export default AddNewSolution;

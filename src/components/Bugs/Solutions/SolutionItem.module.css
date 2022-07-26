@@ -9,12 +9,6 @@
   font-size: 1.3rem;
 }
 
-.solutionItem h3 {
-  color: #003d80;
-  text-indent: 5%;
-  font-size: 1.4rem;
-}
-
 .approveSolutionAction {
   display: flex;
   justify-content: flex-end;

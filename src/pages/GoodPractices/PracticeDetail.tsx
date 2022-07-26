@@ -8,7 +8,6 @@ import useHttp from "../../hooks/useHttp";
 import HttpStatuses from "../../enums/httpStatuses";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import styles from "./PracticeDetail.module.css";
 
 const PracticeDetail: React.FC = () => {
   type PracticeDetailParams = {
@@ -37,11 +36,9 @@ const PracticeDetail: React.FC = () => {
 
   return (
     <>
-      {errorMessage && (
-        <p className={styles.errorTextPractices}>{errorMessage}</p>
-      )}
+      {errorMessage && <p className="errorText">{errorMessage}</p>}
       {!loadedPractice.description && status === HttpStatuses.COMPLETED ? (
-        <p className={styles.warningTextPractices}>
+        <p className="warningText">
           No description found for that particular practice!
         </p>
       ) : (

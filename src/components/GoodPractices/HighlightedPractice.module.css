@@ -12,33 +12,7 @@
   color: #003d80;
 }
 
-.singlePractice h3 {
-  font-size: 1.2rem;
-  text-align: center;
-  color: #003d80;
-}
-
-.linkEdit {
-  color: #ccccff;
-  background-color: #003d80;
-  border-radius: 22px;
-  padding: 0.5rem 2rem;
-  padding-bottom: 0.5rem;
-  margin: 20px;
-  text-decoration: none;
-  font-size: 1.3rem;
-}
-
-.linkEdit:visited {
-  background-color: #92b6d5;
-  color: #003d80;
-}
-
-.deleteButton,
-.goBackButton {
-  font-size: 1.3rem;
-}
-
 .deleteButton {
   float: right;
+  font-size: 1.3rem;
 }

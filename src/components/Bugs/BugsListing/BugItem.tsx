@@ -20,25 +20,19 @@ const BugItem: React.FC<BugItemProps> = (props) => (
     <h3>{props.title}</h3>
     {props.isSolved ? (
       <>
-        <Link className={styles.link} to={`/solvedBugs/${props.id}`}>
+        <Link className="link" to={`/solvedBugs/${props.id}`}>
           View more
         </Link>
-        <Link
-          className={styles.link}
-          to={`/solvedBugs/${props.id}/solving`}
-        >
+        <Link className="link" to={`/solvedBugs/${props.id}/solving`}>
           View solving
         </Link>
       </>
     ) : (
       <>
-        <Link className={styles.link} to={`/unSolvedBugs/${props.id}`}>
+        <Link className="link" to={`/unSolvedBugs/${props.id}`}>
           View more
         </Link>
-        <Link
-          className={styles.link}
-          to={`/unsolvedBugs/${props.id}/solving`}
-        >
+        <Link className="link" to={`/unsolvedBugs/${props.id}/solving`}>
           Suggested solutions
         </Link>
       </>

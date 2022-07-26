@@ -7,7 +7,6 @@ import LoadingSpinner from "../../../components/UI/LoadingSpinner";
 import HttpStatuses from "../../../enums/httpStatuses";
 import useHttp from "../../../hooks/useHttp";
 import { getOneBug } from "../../../services/api-bugs";
-import styles from "./UnsolvedBugDetails.module.css";
 
 const UnsolvedBugDetails = () => {
   const navigate = useNavigate();
@@ -37,11 +36,9 @@ const UnsolvedBugDetails = () => {
 
   return (
     <>
-      {errorMessage && (
-        <p className={styles.errorTextPractices}>{errorMessage}</p>
-      )}
+      {errorMessage && <p className="errorText">{errorMessage}</p>}
       {!loadedBug.solution && status === HttpStatuses.COMPLETED && (
-        <p className={styles.warningTextPractices}>
+        <p className="warningText">
           No solution was found for that particular bug!
         </p>
       )}
@@ -51,15 +48,15 @@ const UnsolvedBugDetails = () => {
         description={loadedBug.description}
         authorEmail={loadedBug.authorEmail}
       />
-      <div className={styles.actions}>
+      <div className="actions">
         <Button
           type="button"
-          className={styles.goBackButton}
+          className="goBackButton"
           onClick={() => navigate(`/bugs`)}
         >
           Go back
         </Button>
-        <Link className={styles.link} to={`/unsolvedBugs/${bugId}/contribute`}>
+        <Link className="link" to={`/unsolvedBugs/${bugId}/contribute`}>
           Add a solution
         </Link>
       </div>

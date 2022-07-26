@@ -31,7 +31,7 @@ const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
       <p>{props.description}</p>
       <Button
         type="button"
-        className={styles.goBackButton}
+        className="goBackButton"
         onClick={() => navigate(-1)}
       >
         Go back
@@ -39,7 +39,7 @@ const HighlightedPractice: React.FC<HighlightedPracticeProps> = (props) => {
       {currentUserData.userEmail === props.author && (
         <>
           <Link
-            className={styles.linkEdit}
+            className="link"
             to="/editGoodPractice"
             state={{
               goodPracticeData: {

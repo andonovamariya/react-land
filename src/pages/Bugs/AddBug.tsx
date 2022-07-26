@@ -1,17 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import AddBugForm, {
-  InputtedDataBugs,
-} from "../../components/Bugs/ContributeBugs/NewBugForm";
+import AddNewBug, { InputDataBugs } from "../../components/Bugs/ContributeBugs/AddNewBug";
 import HttpStatuses from "../../enums/httpStatuses";
 import useHttp from "../../hooks/useHttp";
 import { addBug } from "../../services/api-bugs";
 
-const AddNewBug: React.FC = () => {
+const AddBug: React.FC = () => {
   const { sendRequest, status } = useHttp(addBug, true);
   const navigate = useNavigate();
 
-  const addBugHandler = (bugData: InputtedDataBugs) => {
+  const addBugHandler = (bugData: InputDataBugs) => {
     sendRequest(bugData);
   };
 
@@ -22,10 +20,10 @@ const AddNewBug: React.FC = () => {
   }, [status, navigate]);
 
   return (
-    <AddBugForm
+    <AddNewBug
       onAddBug={addBugHandler}
       isLoading={status === HttpStatuses.COMPLETED}
     />
   );
 };
-export default AddNewBug;
+export default AddBug;

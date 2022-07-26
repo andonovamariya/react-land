@@ -9,8 +9,6 @@ import { isDatabaseEmpty } from "../../../helpers";
 import useHttp from "../../../hooks/useHttp";
 import { getAllSolutionsForABug } from "../../../services/api-solutions";
 
-import styles from "./index.module.css";
-
 const ShowSolutions: React.FC = () => {
   const navigate = useNavigate();
   type SolvedBugDetailsParams = {
@@ -38,10 +36,10 @@ const ShowSolutions: React.FC = () => {
   return (
     <>
       {errorMessage && (
-        <p className={styles.errorTextSolutions}>{errorMessage}</p>
+        <p className="errorText">{errorMessage}</p>
       )}
       {isDatabaseEmpty(loadedSolutions, status) ? (
-        <p className={styles.warningTextSolutions}>
+        <p className="warningText">
           Solutions were NOT found in my database.
         </p>
       ) : (
@@ -49,7 +47,7 @@ const ShowSolutions: React.FC = () => {
       )}
       <Button
         type="button"
-        className={styles.goBackButton}
+        className="goBackButton"
         onClick={() => navigate(-1)}
       >
         Go back
